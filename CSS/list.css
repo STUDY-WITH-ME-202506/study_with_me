@@ -1,4 +1,11 @@
 
+.container {
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
 .todo-list {
     width: 50vw;
     background-color: var(--todo-bg);

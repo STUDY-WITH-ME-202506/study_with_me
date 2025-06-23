@@ -21,10 +21,3 @@
 .quote-board {
     background-color: var(--quote-bg);
 }
-
-.container {
-    flex: 1;
-    display: flex;
-    position: relative;
-    overflow: hidden;
-}
