@@ -16,11 +16,12 @@
             --question-bg: #aab7b8;
             --answer-bg: #f4f6f6;
             --input-bg: #ffffff;
-            --todo-bg: #ffffff;
+            --todo-bg: #E6ECF0; /* 변경된 투두리스트 배경 색상 */
             --button-bg: #000080;
             --button-color: #ffffff;
             --border-color: #aab7b8;
             --tab-bg: #aab7b8;
+
         }
 
         body {
@@ -158,8 +159,8 @@
             color: var(--button-color);
             border: none;
             border-radius: 4px;
-            width: 20px;
-            height: 20px;
+            width: 32px;
+            height: 32px;
             font-weight: bold;
             font-size: 14px;
             text-align: center;
@@ -199,6 +200,7 @@
         .todo-input button {
             background-color: var(--button-bg);
             color: var(--button-color);
+            border-radius: 6px;
         }
 
         .todo-item {
@@ -226,7 +228,7 @@
     <header>
         <div class="stopwatch">⏱ 스톱워치</div>
         <div class="logo">Study With Me</div>
-        <div class="quote-board">🧠 명언 API<br>명언이 이곳에 표시됩니다.</div>
+        <div class="quote-board">오늘의 명언<br>명언이 이곳에 표시됩니다.</div>
     </header>
 
     <div class="container">
