@@ -1,0 +1,37 @@
+
+:root {
+    --main-bg: #ffffff;
+    --header-bg: #ffffff;
+    --stopwatch-bg: #aab7b8;
+    --logo-color: #000000;
+    --quote-bg: #aab7b8;
+    --ai-bg: #ffffff;
+    --question-bg: #aab7b8;
+    --answer-bg: #f4f6f6;
+    --input-bg: #ffffff;
+    --todo-bg: #E6ECF0; /* 변경된 투두리스트 배경 색상 */
+    --button-bg: #000080;
+    --button-color: #ffffff;
+    --border-color: #aab7b8;
+    --tab-bg: #aab7b8;
+
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--main-bg);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header {
+    background-color: var(--header-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 2px solid var(--border-color);
+    position: relative;
+}
