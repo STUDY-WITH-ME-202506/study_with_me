@@ -1,12 +1,33 @@
-
-
 .stopwatch, .quote-board, .logo {
     padding: 8px 12px;
     border-radius: 8px;
 }
 
-.stopwatch {
+.stopwatch-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
     background-color: var(--stopwatch-bg);
+    height: 50px;
+}
+
+.stopwatch {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.stopwatch-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.stopwatch-buttons button {
+    padding: 5px 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 6px;
 }
 
 .logo {
@@ -18,13 +39,84 @@
     color: var(--logo-color);
 }
 
-.quote-board {
+/* 오늘의 명언 버튼 */
+.quote-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
     background-color: var(--quote-bg);
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 2rem;
+    height: 50px;
 }
 
-.container {
-    flex: 1;
-    display: flex;
-    position: relative;
-    overflow: hidden;
+/* 모달 오버레이 */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
 }
+
+/* 모달 내용 */
+.modal-content {
+    background-color: var(--answer-bg);
+    color: var(--logo-color);
+    padding: 30px 40px;
+    border-radius: 12px;
+    text-align: left;
+    max-width: 500px;
+    width: 80%;
+    line-height: 1.8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+}
+
+.modal-content h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--button-bg);
+    margin-bottom: 20px;
+}
+
+.modal-content .quote-name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--logo-color);
+}
+
+.modal-content .quote-profile {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 16px;
+}
+
+.modal-content .quote-text {
+    font-size: 1.5rem;
+    color: #333;
+    background-color: #ffffff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border-left: 4px solid var(--button-bg);
+    line-height: 1.6;
+    white-space: normal;
+}
+
+.modal-content button {
+    margin-top: 20px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #ccc;
+    cursor: pointer;
+}
+
