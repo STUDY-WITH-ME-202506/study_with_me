@@ -1,4 +1,12 @@
 
+.container {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 80px); /* header 높이 제외 */
+    position: relative;
+    overflow: hidden;
+}
+
 .todo-list {
     width: 50vw;
     background-color: var(--todo-bg);
