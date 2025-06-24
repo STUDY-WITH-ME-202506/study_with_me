@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyAnx5WFFsMBgfx8dmdEruWmT5888F5TJCI';
+const API_KEY = '';
 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
 
@@ -73,7 +73,7 @@ ${inputQuestion}
     "1단계: 문제 정의",
     "2단계: 문제 풀이"
   ],
-  "answer": 문제의 답
+  "answer": 문제의 답 
   "tip": "비슷한 유형에서의 풀이법"
 }
 `;
