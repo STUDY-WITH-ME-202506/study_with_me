@@ -22,7 +22,7 @@ async function aiCall() {
   textInput.value = '';
   const prompt = generatePrompt(userInfo, inputQuestion);
   const gemini = {contents: [{parts: [{text: prompt}]}]};
-  userTalkRendering(inputQuestion);
+  talkRendering("user",inputQuestion);
   // 제미나이에게 문자 질문하는 형식
   const res = await fetch(url, {
     method: 'POST', // 보낸다.
@@ -45,7 +45,6 @@ async function aiCall() {
     const endIndex = problemJsonString.lastIndexOf('}');
     problemJsonString = problemJsonString.substring(startIndex, endIndex + 1);
   }
-  aiTalkRendering(problemJsonString);
   stringSplit(problemJsonString);
 
 
@@ -76,7 +75,8 @@ function stringSplit(jsonString) {
   });
 
   console.log("str", resultText);
-  aiTalkRendering(resultText)
+  // aiTalkRendering(resultText)
+  talkRendering("ai", resultText)
 }
 
 
@@ -122,17 +122,26 @@ ${inputQuestion}
 }
 
 
-//=========렌더링===========//
-function userTalkRendering(inputQuestion) {
-  const userSpeechBubble = document.querySelector('.prev-question');
-  userSpeechBubble.textContent = inputQuestion;
+//=========렌더링===========//]
+/**
+ * 누구에게 메세지를 렌더링 할지 정하는 함수
+ * @param who 누구에게 하는지, 항상 문자열로 반환할 것
+ * @param message 무슨 메세지를 전달할 건지
+ */
+function talkRendering(who, message){
+  // 사용자 말풍선에 렌더링
+  if (who === "user"){
+    document.querySelector('.prev-question').textContent = message;
+  }
+  // ai 말풍선에 렌더링
+  else if (who === "ai"){
+    document.querySelector('.answer-box').textContent = message;
+  }
+  // 둘다 아닐시 오류원인 로그로 출력
+  else{
+    console.log("정확하게 누구인지 알려주세요");
+  }
 }
-
-function aiTalkRendering(problemJsonString) {
-  const aiSpeechBubble = document.querySelector('.answer-box');
-  aiSpeechBubble.textContent = problemJsonString;
-}
-
 
 //========변수 값 리턴==========//
 export function aiGet() {
@@ -140,9 +149,3 @@ export function aiGet() {
 }
 
 // 질문 카운트 만들기
-/*
-* 1. v)api 키로 제미나이 질문 받기
-* 2. v)프롬프트로 질문 유지하기
-* 3. v)질문과 답변 렌더링하기
-* 4. 입력받은 질문 답해주기
-* */
