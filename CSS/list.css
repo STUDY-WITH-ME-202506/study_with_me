@@ -141,7 +141,7 @@
 #todo-toggle-btn {
     position: fixed;
     top: 50%;
-    right: 0px;
+    right: 0;
     transform: translateY(-50%);
     background-color: #6dbaf7;
     color: white;
