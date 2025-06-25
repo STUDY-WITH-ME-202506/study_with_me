@@ -1,22 +1,30 @@
-const API_KEY = '';
+const API_KEY = 'AIzaSyAnx5WFFsMBgfx8dmdEruWmT5888F5TJCI';
 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
 
 
-
+//======== 변수 정의 ========//
+// 질문자 정보
+let userInfo = '{나이: 만 15세, 수준: 보통}';
+// 질문 내용
+let inputQuestion = '기말고사를 대비하기 위해 중학교 3학년 수학 2차 방정식을 내 수준에 맞춰서 하나 내줘';
 // async가 함수 앞에 있어야 await을 쓸 수 있음
 // await은 리턴 값이 오기 전까지 기다림
+
+
+
+//=========함수 정의=========//
 /**
  * 제미나이에게 프롬프트의 질문을 보내서 답변을 리턴하는 함수
  * @return {Promise<void>}
  */
 async function aiCall() {
-  // 질문자 정보
-  let userInfo = "{나이: 만 15세, 수준: 보통}"
-  // 질문 내용
-  let inputQuestion ="기말고사를 대비하기 위해 중학교 3학년 수학 2차 방정식을 내 수준에 맞춰서 하나 내줘"
+  const textInput = document.getElementById('problemText');
+  inputQuestion = textInput.value;
+  textInput.value = '';
   const prompt = generatePrompt(userInfo, inputQuestion);
-  const gemini = {contents: [{parts: [{ text: prompt }]}]};
+  const gemini = {contents: [{parts: [{text: prompt}]}]};
+  userTalkRendering(inputQuestion);
   // 제미나이에게 문자 질문하는 형식
   const res = await fetch(url, {
     method: 'POST', // 보낸다.
@@ -39,10 +47,25 @@ async function aiCall() {
     const endIndex = problemJsonString.lastIndexOf('}');
     problemJsonString = problemJsonString.substring(startIndex, endIndex + 1);
   }
-  console.log(problemJsonString);
+  const problemString = JSON.parse(problemJsonString);
+  aiTalkRendering(problemJsonString);
+  stringSplit(problemJsonString);
+
+
+}
+
+function stringSplit(jsonString) {
+  console.log(jsonString);
+  const obj = JSON.parse(jsonString)
+  for (let key in obj){
+    const value = obj[key]
+  }
+  const tempString = jsonString.problemType + jsonString.problemLevel;
+  return tempString;
 }
 
 
+//===========프롬프트========//
 
 /**
  * @description Gemini API 에게 보낼 프롬프트를 생성합니다.
@@ -52,7 +75,7 @@ async function aiCall() {
  */
 function generatePrompt(userInfo, inputQuestion) {
   // AI가 더 좋은 답변을 생성하도록, 역할을 부여하고 명확하게 지시합니다.
-const prompt = `
+  const prompt = `
 당신은 현재 대한민국의 1타 강사입니다. 아래의 질문자 정보를 고려해서 질문 의도에 따라
  원하는 문제를 하나 만들어주거나, 문제를 만들지않고 질문의 답변만 해주세요.
 그리고 만든 문제를 풀이할 때 논리적인 과정을 통해서 답을 도출하는 과정을 설명해주세요.
@@ -80,11 +103,29 @@ ${inputQuestion}
   return prompt;
 }
 
+
+//=========렌더링===========//
+function userTalkRendering(inputQuestion) {
+  const userSpeechBubble = document.querySelector('.prev-question');
+  userSpeechBubble.textContent = inputQuestion;
+}
+
+function aiTalkRendering(problemJsonString) {
+  const aiSpeechBubble = document.querySelector('.answer-box');
+  aiSpeechBubble.textContent = problemJsonString;
+}
+
+
+
+//========변수 값 리턴==========//
 export function aiGet() {
   aiCall(); // 호출만 하고 결과는 console에 출력됨
 }
+
 // 질문 카운트 만들기
 /*
 * 1. v)api 키로 제미나이 질문 받기
 * 2. v)프롬프트로 질문 유지하기
-* 3. */
+* 3. v)질문과 답변 렌더링하기
+* 4. 입력받은 질문 답해주기
+* */
