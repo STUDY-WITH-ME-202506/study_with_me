@@ -1,30 +1,30 @@
 import {talkRendering, stringSplit} from './aiRendering.js';
 
-const API_KEY = 'AIzaSyAnx5WFFsMBgfx8dmdEruWmT5888F5TJCI';
-const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
-
 
 //======== 변수 정의 ========//
-// 질문자 정보
-let userInfo = '{나이: 만 15세, 수준: 보통}';
-// 질문 내용
-let inputQuestion = '기말고사를 대비하기 위해 중학교 3학년 수학 2차 방정식을 내 수준에 맞춰서 하나 내줘';
-// async가 함수 앞에 있어야 await을 쓸 수 있음
-// await은 리턴 값이 오기 전까지 기다림
-
+// 제미나이 key와 주소
+const API_KEY = 'AIzaSyAnx5WFFsMBgfx8dmdEruWmT5888F5TJCI';
+const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+// 프롬프트관련 변수
+const textInput = document.getElementById('problemText');//질문 입력창 주소
+let userInfo = '{나이: 만 15세, 수준: 보통}';// 질문자 정보
+let inputQuestion = '';// 질문 내용
 
 //=========함수 정의=========//
 /**
  * 제미나이에게 프롬프트의 질문을 보내서 답변을 리턴하는 함수
  * @return {Promise<void>}
  */
+// async가 함수 앞에 있어야 await을 쓸 수 있음
+// await은 리턴 값이 오기 전까지 기다림
 async function aiCall() {
-  const textInput = document.getElementById('problemText');
-  inputQuestion = textInput.value;
-  textInput.value = '';
-  const prompt = generatePrompt(userInfo, inputQuestion);
-  const gemini = {contents: [{parts: [{text: prompt}]}]};
-  talkRendering('user', inputQuestion);
+  inputQuestion = textInput.value; // 사용자가 입력한 질문 내용
+  // 제미나이에게 프로프트 내용을 질문하기
+  const gemini = {contents: [{parts: [{text: generatePrompt(userInfo, inputQuestion)}]}]};
+
+  textInput.value = '';// 질문창 내용 초기화
+  talkRendering('user', inputQuestion);// 사용자가 입력한 질문 렌더링
+
   // 제미나이에게 문자 질문하는 형식
   const res = await fetch(url, {
     method: 'POST', // 보낸다.
@@ -40,6 +40,7 @@ async function aiCall() {
   const result = await res.json();
   // 답변에서 필요한 문자열만 따로 빼내기
   let problemJsonString = result.candidates[0].content.parts[0].text;
+  // "```" 백틱 3개 제거하는 과정
   if (problemJsonString.startsWith('```')) {
     console.log('마크다운 형식 감지! JSON 추출을 시작합니다.');
     // 첫 번째 '{' 와 마지막 '}' 사이의 문자열만 잘라냅니다.
@@ -47,7 +48,7 @@ async function aiCall() {
     const endIndex = problemJsonString.lastIndexOf('}');
     problemJsonString = problemJsonString.substring(startIndex, endIndex + 1);
   }
-  talkRendering('ai', stringSplit(problemJsonString));
+  talkRendering('ai', stringSplit(problemJsonString));// 답변 렌더링하기
 }
 
 //===========프롬프트========//
