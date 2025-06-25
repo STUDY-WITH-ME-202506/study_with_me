@@ -60,7 +60,7 @@ async function aiCall() {
  */
 function generatePrompt(userInfo, inputQuestion) {
   // AI가 더 좋은 답변을 생성하도록, 역할을 부여하고 명확하게 지시합니다.
-  return prompt = `
+  return `
 당신은 현재 대한민국의 1타 강사입니다. 아래의 질문자 정보를 고려해서 질문 의도에 따라 
 원하는 문제를 하나 만들어주거나, 문제를 만들지않고 질문의 답변만 해주세요.
 그리고 만든 문제를 풀이할 때 논리적인 과정을 통해서 답을 도출하는 과정을 설명해주세요.
