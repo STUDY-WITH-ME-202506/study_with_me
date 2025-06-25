@@ -61,11 +61,7 @@ function stringSplit(jsonString) {
       problemLevel: '문제 레벨',
       problem: '문제',
       problemOneLine: '문제 한줄 설명',
-      solvingOrder: [
-        '문제 풀이',
-        '1단계: 문제 정의',
-        '2단계: 문제 풀이'
-      ],
+      solvingOrder: ['문제 풀이'],
       answer: '문제의 답',
       tip: '비슷한 유형에서의 풀이법'
     }[key] || key;
@@ -75,7 +71,7 @@ function stringSplit(jsonString) {
       resultText += `${label}:\n${value.map(v => ` - ${v}`).join('\n')}\n\n`;
     }
     else{
-      resultText += `${label}:${value}\n\n`;
+      resultText += `${label}: ${value}\n\n`;
     }
   });
 
@@ -113,9 +109,10 @@ ${inputQuestion}
   "problem": "문제",
   "problemOneLine": "문제 한줄 설명",
   "solvingOrder": [
-    "문제 풀이",
-    "1단계: 문제 정의",
-    "2단계: 문제 풀이"
+    "1단계: [문제 정의 또는 첫 번째 풀이 단계]",
+    "2단계: [두 번째 풀이 단계]",
+    "3단계: [세 번째 풀이 단계]",
+    // ... 필요한 만큼 단계 추가
   ],
   "answer": "문제의 답",
   "tip": "비슷한 유형에서의 풀이법"
