@@ -4,80 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study With Me</title>
-    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="img/favicon.ico">
     <link rel="stylesheet" href="CSS/main.css">
+    <script src="JS/todolist.js" defer></script>
 </head>
 <body>
-<header>
-    <div class="stopwatch-group">
-        <div class="stopwatch">⏱ 스톱워치</div>
-        <div>00:00:00</div>
-        <div class="stopwatch-buttons">
-            <button id="start">시작</button>
-            <button id="pause" disabled>일시정지</button>
-            <button id="reset">초기화</button>
+    <header>
+        <div class="stopwatch-group">
+            <div class="stopwatch">⏱ 스톱워치</div>
+            <div>00:00:00</div>
+            <div class="stopwatch-buttons">
+                <button id="start">시작</button>
+                <button id="pause" disabled>일시정지</button>
+                <button id="reset">초기화</button>
+            </div>
+        </div>
+
+        <!--        <div class="logo">Study With Me</div>-->
+        <div class="logo">
+            <img src="img/logo.png" alt="Study With Me logo">
+        </div>
+
+        <button id="openQuoteModal" class="quote-btn">📜 오늘의 명언</button>
+    </header>
+
+    <!-- 모달창 -->
+    <div id="quoteModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>오늘의 명언</h2>
+            <p class="quote-name">에이브러햄 링컨</p>
+            <p class="quote-profile">미국 16대 대통령</p>
+            <p class="quote-text">
+                반드시 이겨야 하는 건 아니지만 진실할 필요는 있다.
+                반드시 성공해야 하는 건 아니지만, 소신을 가지고 살아야 할 필요는 있다.
+            </p>
+            <button id="closeQuoteModal">닫기</button>
         </div>
     </div>
 
-    <div class="logo">Study With Me</div>
-
-    <button id="openQuoteModal" class="quote-btn">📜 오늘의 명언</button>
-</header>
-
-<!-- 모달창 -->
-<div id="quoteModal" class="modal-overlay">
-    <div class="modal-content">
-        <h2>오늘의 명언</h2>
-        <p class="quote-name">에이브러햄 링컨</p>
-        <p class="quote-profile">미국 16대 대통령</p>
-        <p class="quote-text">
-            반드시 이겨야 하는 건 아니지만 진실할 필요는 있다.
-            반드시 성공해야 하는 건 아니지만, 소신을 가지고 살아야 할 필요는 있다.
-        </p>
-        <button id="closeQuoteModal">닫기</button>
-    </div>
-</div>
-
-<div class="container">
     <div class="todo-list" id="todoList">
+        <h1 class="main-title">To Do List</h1>
+
+        <section class="new-todo">
+            <form id="todo-form">
+                <input type="text" id="todo-input" placeholder="할 일을 입력하세요">
+                <button>+</button>
+            </form>
+        </section>
+
+        <section class="todos">
+            <ul id="todo-ul"></ul>
+        </section>
+
+        <!--        <button class="todo-toggle"><</button>-->
+
         <div class="todo-tabs">
-            <button>오늘</button>
-            <button>이번 주</button>
-            <button>완료</button>
+            <div class="todo-controls">
+                <div class="todos-left">
+                    남은 할 일: <span id="todos-left-count">0</span>개
+                </div>
+                <div class="filters">
+                    <button id="filter-all" class="active">전체</button>
+                    <button id="filter-active">진행 중</button>
+                    <button id="filter-completed">완료됨</button>
+                </div>
+                <button id="clear-completed" class="clear-button">완료된 항목 삭제</button>
+            </div>
         </div>
-        <div class="todo-input">
-            <input type="text" placeholder="할 일을 입력하세요">
-            <button>추가</button>
-            <button>삭제</button>
-        </div>
-        <ul>
-            <li class="todo-item">
-                <input type="checkbox">
-                HTML 복습하기
-            </li>
-            <li class="todo-item">
-                <input type="checkbox">
-                JS 함수 연습
-            </li>
-            <li class="todo-item completed">
-                <input type="checkbox" checked>
-                Spring 강의 듣기
-            </li>
-        </ul>
-        <button class="todo-toggle"
-                onclick="document.querySelector('.ai-section').classList.toggle('shrinked'); document.getElementById('todoList').classList.toggle('show');">
-            &#x276E;
-        </button>
     </div>
 
-    <div class="ai-section">
-        <div class="prev-question">직전에 입력한 질문</div>
-        <div class="answer-box">답변 영역이 이곳에 표시됩니다. (왼쪽 배치)</div>
-        <div class="input-area">
-            <input type="text" placeholder="질문을 입력하세요">
-            <button>확인</button>
+    <button id="todo-toggle-btn">&lt;</button>
+
+    <div class="container">
+        <div class="ai-section">
+            <div class="prev-question">직전에 입력한 질문</div>
+            <div class="answer-box">답변 영역이 이곳에 표시됩니다. (왼쪽 배치)</div>
+            <div class="input-area">
+                <input type="text" placeholder="질문을 입력하세요">
+                <button>확인</button>
+            </div>
         </div>
     </div>
-</div>
+
 </body>
 </html>

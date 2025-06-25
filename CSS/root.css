@@ -35,3 +35,16 @@ header {
     border-bottom: 2px solid var(--border-color);
     position: relative;
 }
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 필요시 오른쪽으로는 right 적용 */
+    padding: 0 1rem;
+    height: 60px; /* header 높이에 맞게 조정 */
+}
+
+.logo img {
+    height: 140px; /* 여기서 크기 조절! */
+    object-fit: contain;
+}
