@@ -55,7 +55,7 @@
 .modal-overlay {
     display: none;
     position: fixed;
-    z-index: 999;
+    z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
@@ -119,4 +119,54 @@
     background-color: #ccc;
     cursor: pointer;
 }
+/* 휴식 모달 전용 */
+#break-modal {
+    display: none;
+}
 
+
+/* 휴식 모달 콘텐츠 */
+#break-modal .modal-content {
+    background-color: var(--todo-bg); /* 휴식용 밝은 배경 */
+    color: var(--logo-color);
+    padding: 30px 40px;
+    border-radius: 12px;
+    text-align: left;
+    max-width: 500px;
+    width: 80%;
+    line-height: 1.8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+}
+
+/* 제목 */
+#break-modal .modal-content h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--button-bg);
+    margin-bottom: 20px;
+}
+
+/* 메시지 본문 */
+#break-modal .modal-content .quote-text {
+    font-size: 1.5rem;
+    background-color: #fff;
+    padding: 16px;
+    border-left: 4px solid var(--button-bg);
+    border-radius: 8px;
+    color: #333;
+    white-space: normal;
+    line-height: 1.6;
+}
+
+/* 닫기 버튼 */
+#break-modal .modal-content button {
+    margin-top: 20px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--button-bg);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
