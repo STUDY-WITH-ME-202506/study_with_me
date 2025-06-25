@@ -1,4 +1,5 @@
 import {talkRendering, stringSplit} from './aiRendering.js';
+import {backtickRemove} from './cleanString.js';
 
 
 //======== 변수 정의 ========//
@@ -11,18 +12,15 @@ let userInfo = '{나이: 만 15세, 수준: 보통}';// 질문자 정보
 let inputQuestion = '';// 질문 내용
 
 //=========함수 정의=========//
-/**
- * 제미나이에게 프롬프트의 질문을 보내서 답변을 리턴하는 함수
- * @return {Promise<void>}
- */
-// async가 함수 앞에 있어야 await을 쓸 수 있음
-// await은 리턴 값이 오기 전까지 기다림
-async function aiCall() {
-  inputQuestion = textInput.value; // 사용자가 입력한 질문 내용
-  // 제미나이에게 프로프트 내용을 질문하기
-  const gemini = {contents: [{parts: [{text: generatePrompt(userInfo, inputQuestion)}]}]};
+
+
+async function aiQuestion(inputQuestion){
+  inputQuestion = textInput.value; // 사용자가 입력한 질문 내용 = textInput.value; // 사용자가 입력한 질문 내용
+  const prompt =generatePrompt(userInfo, inputQuestion)//유저정보와 질문내용을 템플릿에 담은 프롬프트
+  const gemini = {contents: [{parts: [{text: prompt}]}]};// 제미나이에게 질문하기
 
   textInput.value = '';// 질문창 내용 초기화
+
   talkRendering('user', inputQuestion);// 사용자가 입력한 질문 렌더링
 
   // 제미나이에게 문자 질문하는 형식
@@ -36,23 +34,32 @@ async function aiCall() {
     //res의 상태를 내보내기
     throw new Error(`HTTP error! Status: ${res.status}`);
   }
+  return res;
+}
+
+async function aiAnswer(){
+  const res = await aiQuestion();
   // 질문의 답변을 json 으로 변환하기
   const result = await res.json();
   // 답변에서 필요한 문자열만 따로 빼내기
   let problemJsonString = result.candidates[0].content.parts[0].text;
-  // "```" 백틱 3개 제거하는 과정
-  if (problemJsonString.startsWith('```')) {
-    console.log('마크다운 형식 감지! JSON 추출을 시작합니다.');
-    // 첫 번째 '{' 와 마지막 '}' 사이의 문자열만 잘라냅니다.
-    const startIndex = problemJsonString.indexOf('{');
-    const endIndex = problemJsonString.lastIndexOf('}');
-    problemJsonString = problemJsonString.substring(startIndex, endIndex + 1);
-  }
-  talkRendering('ai', stringSplit(problemJsonString));// 답변 렌더링하기
+  // backtickRemove의 반환값을 problemJsonString에 다시 할당합니다.
+  problemJsonString = backtickRemove(problemJsonString);
+  return problemJsonString;
 }
 
+/**
+ * 제미나이에게 프롬프트의 질문을 보내서 답변을 리턴하는 함수
+ * @return {Promise<void>}
+ */
+// async가 함수 앞에 있어야 await을 쓸 수 있음
+// await은 리턴 값이 오기 전까지 기다림
+async function aiCall() {
+  aiQuestion()
+  const problemJsonString = await aiAnswer()
+  talkRendering('ai', stringSplit(problemJsonString));// 답변 렌더링하기
+}
 //===========프롬프트========//
-
 /**
  * @description Gemini API 에게 보낼 프롬프트를 생성합니다.
  * @param userInfo - 질문자 정보
