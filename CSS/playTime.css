@@ -1,6 +1,17 @@
 
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css");
 
+#card-overlay{
+    width: 100vw;
+    height: 100vh;
+    background:black;
+    position: fixed;
+    z-index: 998;
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+}
+
 #user-card {
     width: 35%;
     height: 100%;
@@ -10,7 +21,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    z-index: 99;
+    z-index: 999;
     margin: 3% auto;
 
 }
@@ -18,20 +29,21 @@
 .user-info {
     width: 100%;
     height: 50%;
-    border: 2px solid green;
+    /*border: 2px solid green;*/
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding-top: 5%;
+    padding-top: 3%;
 }
 
 .user-img {
-    border: 2px solid green;
-    width: 30%;
+    /*border: 2px solid green;*/
+    width: 40%;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 2px 3px 7px #00008033;
+    margin-bottom: 5%;
 }
 
 .user-img img {
@@ -39,7 +51,8 @@
     height: 120%;
     object-fit: cover;
     object-position: center;
-    transForm: translate(-8%, -8%);
+    transForm: translate(-8%, -6%);
+
 }
 
 /* 오늘의 공부게이지 */
@@ -47,7 +60,7 @@
     width: 50%;
     height: 50%;
     /*border: 2px solid green;*/
-    margin-top: 2%;
+    /*margin-top: 2%;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,8 +69,8 @@
 .time-gauge{
     box-shadow: 2px 3px 5px #00008026;
     border-radius: 15px;
-    width: 70%;
-    height: 20%;
+    width: 75%;
+    height: 30%;
     overflow: hidden;
     background: #aab7b866;
     margin-bottom: 5%;
@@ -68,9 +81,9 @@
 #fill-gauge {
     background: linear-gradient(to right,#efae25,#fbc758);
     opacity: 0.9;
-    width: 56%;
+    width: 0;
     height: 100%;
-
+    transition: 0.4s ease-out;
 }
 .time-per{
     width: 100%;
@@ -82,24 +95,22 @@
     font-size: 16px;
 }
 
-.time-per#bottom{
 
-    color: var( --logo-color); /* 게이지 위에서 보일 텍스트 색상 */
-    z-index: 2;
-}
 .time-per#top{
 
     color: #623909; /* 게이지 위에서 보일 텍스트 색상 */
-    z-index: 3;
-    clip-path: inset(0 44% 0 0%); /* 100 - fill gauge width  */
 
+    z-index: 3;
 }
 
 .gauge-message{
     font-weight: 600;
     font-size: 2rem;
     color: #623909;
+    margin-top: 1%;
 }
+
+
 
 /* 오늘의 공부게이지 끝*/
 
@@ -107,7 +118,7 @@
 .achieve-container {
     width: 100%;
     height: 50%;
-    border: 2px solid blue;
+    /*border: 2px solid blue;*/
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -222,16 +233,15 @@
 #user-card.show{
     display: flex;
 }
-#card-overlay{
-    width: 100vw;
-    height: 100vh;
-    background:black;
-    position: fixed;
-    z-index: 10;
-    opacity: 0.2;
-    top: 0;
-    left: 0;
+#card-overlay.hide{
+    display: none;
 }
+
+#card-overlay.show{
+    display: block;
+}
+
+
 
 /* 원형 그래프 조절 부분 */
 .achieve-circle.circle1{

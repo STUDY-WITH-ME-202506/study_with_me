@@ -70,9 +70,10 @@
                 <button id="clear-completed" class="clear-button">완료된 항목 삭제</button>
             </div>
         </div>
+        <button id="modal-btn"></button>
     </div>
 
-    <button id="todo-toggle-btn">&lt;</button>
+        <button id="todo-toggle-btn">&lt;</button>
 
     <div class="container">
         <div class="ai-section">
@@ -87,19 +88,18 @@
     </div>
 
     <!--  playtime 모달영역  -->
-    <div id="card-overlay"></div>
-    <div id="user-card" class="show">
+    <div id="card-overlay" class="hide"></div>
+    <div id="user-card" class="hide">
         <div id="close-card-btn"><i class="fas fa-times "></i></div>
         <div class="user-info">
             <div class="user-img"><img src="./img/userImg.png" alt=""></div>
+                <span class="gauge-message">목표시간까지</span>
             <div class="playtime">
                 <div class="time-gauge">
                     <span class="time-per" id="top">40%</span>
                     <div id="fill-gauge"></div>
-                    <span class="time-per" id="bottom">40%</span>
                 </div>
-                <span class="gauge-message">오늘의 공부 게이지!</span>
-                <span class="gauge-message">@@ 만큼 했어요</span>
+                <span class="gauge-message bottom">@@ 만큼 했어요</span>
             </div>
         </div>
 
