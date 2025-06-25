@@ -9,17 +9,17 @@
     <script type="module" src="JS/app.js"></script>
 </head>
 <body>
-<header>
-    <div class="stopwatch-group">
-        <div class="stopwatch">⏱ 스톱워치</div>
-        <div class="stopwatch-display">00:00:00</div>
-        <div class="stopwatch-buttons">
-            <button id="start">시작</button>
-            <button id="pause" disabled>일시정지</button>
-            <button id="reset">초기화</button>
+    <header>
+        <div class="stopwatch-group">
+            <div class="stopwatch">⏱ 스톱워치</div>
+            <div class="stopwatch-display">00:00:00</div>
+            <div class="stopwatch-buttons">
+                <button id="start">시작</button>
+                <button id="pause" disabled>일시정지</button>
+                <button id="reset">초기화</button>
+            </div>
         </div>
-    </div>
-      
+
         <div class="logo">
             <img src="img/logo.png" alt="Study With Me logo">
         </div>
@@ -55,7 +55,7 @@
             <ul id="todo-ul"></ul>
         </section>
 
-        <!--        <button class="todo-toggle"><</button>-->
+        <!--                <button class="todo-toggle"><</button>-->
 
         <div class="todo-tabs">
             <div class="todo-controls">
@@ -84,6 +84,74 @@
             </div>
         </div>
         <script type="module" src="./JS/app.js"></script>
+    </div>
+
+    <!--  playtime 모달영역  -->
+    <div id="card-overlay"></div>
+    <div id="user-card" class="show">
+        <div id="close-card-btn"><i class="fas fa-times "></i></div>
+        <div class="user-info">
+            <div class="user-img"><img src="./img/userImg.png" alt=""></div>
+            <div class="playtime">
+                <div class="time-gauge">
+                    <span class="time-per" id="top">40%</span>
+                    <div id="fill-gauge"></div>
+                    <span class="time-per" id="bottom">40%</span>
+                </div>
+                <span class="gauge-message">오늘의 공부 게이지!</span>
+                <span class="gauge-message">@@ 만큼 했어요</span>
+            </div>
+        </div>
+
+        <div class="achieve-container">
+            <div class="achieve-card">
+
+                <div class="achieve-img"><img src="./img/trophy.png" alt=""></div>
+                <div class="achieve-value achieve-text">질문왕</div>
+
+                <div class="achieve-infobox">
+                    <div class="achieve-circle circle1">
+                        <div class="inner-circle">
+                            <span class="grade">C+</span>
+                        </div>
+                    </div>
+                    <div class="achieve-stat achieve-text achieve1">11 / 20</div>
+                </div>
+            </div>
+
+            <div class="achieve-card">
+
+                <div class="achieve-img"><img src="./img/trophy.png" alt=""></div>
+                <div class="achieve-value achieve-text">계획대장군</div>
+
+                <div class="achieve-infobox">
+                    <div class="achieve-circle circle2">
+                        <div class="inner-circle">
+                            <span class="grade">C+</span>
+                        </div>
+                    </div>
+                    <div class="achieve-stat achieve-text achieve2">11 / 20</div>
+                </div>
+            </div>
+
+            <div class="achieve-card">
+
+                <div class="achieve-img"><img src="./img/trophy.png" alt=""></div>
+                <div class="achieve-value achieve-text">공부벌레</div>
+
+                <div class="achieve-infobox">
+                    <div class="achieve-circle circle3">
+                        <div class="inner-circle">
+                            <span class="grade">C+</span>
+                        </div>
+                    </div>
+                    <div class="achieve-stat achieve-text achieve3">11 / 20</div>
+                </div>
+            </div>
+
+        </div>
+
+
     </div>
 
 </body>

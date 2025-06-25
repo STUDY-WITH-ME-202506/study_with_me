@@ -1,0 +1,259 @@
+
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css");
+
+#user-card {
+    width: 35%;
+    height: 100%;
+    border: 10px solid #000080CC;
+    border-radius: 5%;
+    background: var(--usercard-bg);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 99;
+    margin: 3% auto;
+
+}
+
+.user-info {
+    width: 100%;
+    height: 50%;
+    border: 2px solid green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 5%;
+}
+
+.user-img {
+    border: 2px solid green;
+    width: 30%;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 2px 3px 7px #00008033;
+}
+
+.user-img img {
+    width: 120%;
+    height: 120%;
+    object-fit: cover;
+    object-position: center;
+    transForm: translate(-8%, -8%);
+}
+
+/* 오늘의 공부게이지 */
+.playtime {
+    width: 50%;
+    height: 50%;
+    /*border: 2px solid green;*/
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.time-gauge{
+    box-shadow: 2px 3px 5px #00008026;
+    border-radius: 15px;
+    width: 70%;
+    height: 20%;
+    overflow: hidden;
+    background: #aab7b866;
+    margin-bottom: 5%;
+    text-align: center;
+    color: black;
+    position: relative;
+}
+#fill-gauge {
+    background: linear-gradient(to right,#efae25,#fbc758);
+    opacity: 0.9;
+    width: 56%;
+    height: 100%;
+
+}
+.time-per{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.time-per#bottom{
+
+    color: var( --logo-color); /* 게이지 위에서 보일 텍스트 색상 */
+    z-index: 2;
+}
+.time-per#top{
+
+    color: #623909; /* 게이지 위에서 보일 텍스트 색상 */
+    z-index: 3;
+    clip-path: inset(0 44% 0 0%); /* 100 - fill gauge width  */
+
+}
+
+.gauge-message{
+    font-weight: 600;
+    font-size: 2rem;
+    color: #623909;
+}
+
+/* 오늘의 공부게이지 끝*/
+
+
+.achieve-container {
+    width: 100%;
+    height: 50%;
+    border: 2px solid blue;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+}
+
+/*  업적부분 */
+.achieve-card {
+    width: 25%;
+    height: 65%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 5px solid #623909CC;
+    background: #fffdf9;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px #00006026;
+    padding:1% 0;
+}
+
+.achieve-img{
+    /*border: 3px solid red;*/
+    width: 80%;
+    height: 40%;
+    overflow: hidden;
+
+}
+.achieve-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    rotate: -3deg;
+}
+
+/* 업적 그래프 부분 */
+.achieve-infobox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.achieve-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    /*border: 3px solid red;*/
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-bottom: 7%;
+}
+
+.inner-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--usercard-bg);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grade {
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 7%;
+    cursor: default;
+    color: #816139;
+}
+
+.achieve-text{
+    font-size: 1.5rem;
+    font-weight: 700;
+    cursor: default;
+    margin-bottom:7%;
+}
+
+
+
+
+
+
+#close-card-btn{
+    /*border:1px solid #623909;*/
+    width: fit-content;
+    height: fit-content;
+    margin-left: 90%;
+    margin-top: 2%;
+    cursor: pointer;
+}
+#close-card-btn i{
+    font-size: 4rem;
+    color: #000080CC;
+}
+
+
+/* 버튼과 연동시킬 닫기버튼*/
+
+#user-card.hide{
+    display: none;
+}
+
+#user-card.show{
+    display: flex;
+}
+#card-overlay{
+    width: 100vw;
+    height: 100vh;
+    background:black;
+    position: fixed;
+    z-index: 10;
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+}
+
+/* 원형 그래프 조절 부분 */
+.achieve-circle.circle1{
+
+    background: conic-gradient(
+            hsl(34, 100%, 50%) 120deg,
+            transparent 120deg);
+}
+.achieve-circle.circle2{
+
+    background: conic-gradient(
+            hsl(34, 100%, 50%) 140deg,
+            transparent 140deg);
+}
+.achieve-circle.circle3{
+
+    background: conic-gradient(
+            hsl(34, 100%, 50%) 180deg,
+            transparent 180deg);
+}
+
+/* 텍스트 내용 조절 클래스*/
+/*.achieve-text.achieve1*/
+/*.achieve-text.achieve2*/
+/*.achieve-text.achieve3*/
