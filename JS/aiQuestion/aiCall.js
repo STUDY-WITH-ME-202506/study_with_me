@@ -2,7 +2,6 @@ const API_KEY = 'AIzaSyAnx5WFFsMBgfx8dmdEruWmT5888F5TJCI';
 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
 
-
 //======== 변수 정의 ========//
 // 질문자 정보
 let userInfo = '{나이: 만 15세, 수준: 보통}';
@@ -10,7 +9,6 @@ let userInfo = '{나이: 만 15세, 수준: 보통}';
 let inputQuestion = '기말고사를 대비하기 위해 중학교 3학년 수학 2차 방정식을 내 수준에 맞춰서 하나 내줘';
 // async가 함수 앞에 있어야 await을 쓸 수 있음
 // await은 리턴 값이 오기 전까지 기다림
-
 
 
 //=========함수 정의=========//
@@ -47,7 +45,6 @@ async function aiCall() {
     const endIndex = problemJsonString.lastIndexOf('}');
     problemJsonString = problemJsonString.substring(startIndex, endIndex + 1);
   }
-  const problemString = JSON.parse(problemJsonString);
   aiTalkRendering(problemJsonString);
   stringSplit(problemJsonString);
 
@@ -55,13 +52,35 @@ async function aiCall() {
 }
 
 function stringSplit(jsonString) {
-  console.log(jsonString);
-  const obj = JSON.parse(jsonString)
-  for (let key in obj){
-    const value = obj[key]
-  }
-  const tempString = jsonString.problemType + jsonString.problemLevel;
-  return tempString;
+  const obj = JSON.parse(jsonString); // 문자열 → 객체
+  let resultText = '';
+  // ":"를 기준으로 알아서 key와 value로 나눠줌
+  Object.entries(obj).forEach(([key, value]) => {
+    const label = {
+      problemType: '문제 유형',
+      problemLevel: '문제 레벨',
+      problem: '문제',
+      problemOneLine: '문제 한줄 설명',
+      solvingOrder: [
+        '문제 풀이',
+        '1단계: 문제 정의',
+        '2단계: 문제 풀이'
+      ],
+      answer: '문제의 답',
+      tip: '비슷한 유형에서의 풀이법'
+    }[key] || key;
+
+    // value가 배열일 경우 예쁘게 줄바꿈 처리
+    if (Array.isArray(value)) {
+      resultText += `${label}:\n${value.map(v => ` - ${v}`).join('\n')}\n\n`;
+    }
+    else{
+      resultText += `${label}:${value}\n\n`;
+    }
+  });
+
+  console.log("str", resultText);
+  aiTalkRendering(resultText)
 }
 
 
@@ -91,12 +110,14 @@ ${inputQuestion}
 {
   "problemType": "문제 유형",
   "problemLevel": "문제 레벨",
+  "problem": "문제",
   "problemOneLine": "문제 한줄 설명",
   "solvingOrder": [
+    "문제 풀이",
     "1단계: 문제 정의",
     "2단계: 문제 풀이"
   ],
-  "answer": 문제의 답 
+  "answer": "문제의 답",
   "tip": "비슷한 유형에서의 풀이법"
 }
 `;
@@ -114,7 +135,6 @@ function aiTalkRendering(problemJsonString) {
   const aiSpeechBubble = document.querySelector('.answer-box');
   aiSpeechBubble.textContent = problemJsonString;
 }
-
 
 
 //========변수 값 리턴==========//
