@@ -1,3 +1,5 @@
+import {talkRendering} from './aiRendering.js';
+
 const API_KEY = 'AIzaSyAnx5WFFsMBgfx8dmdEruWmT5888F5TJCI';
 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
@@ -22,7 +24,7 @@ async function aiCall() {
   textInput.value = '';
   const prompt = generatePrompt(userInfo, inputQuestion);
   const gemini = {contents: [{parts: [{text: prompt}]}]};
-  talkRendering("user",inputQuestion);
+  talkRendering('user', inputQuestion);
   // 제미나이에게 문자 질문하는 형식
   const res = await fetch(url, {
     method: 'POST', // 보낸다.
@@ -51,8 +53,11 @@ async function aiCall() {
 }
 
 function stringSplit(jsonString) {
-  const obj = JSON.parse(jsonString); // 문자열 → 객체
-  let resultText = '';
+  const obj = JSON.parse(jsonString);// 문자열 → 객체
+
+
+  let resultText = notDollar(obj);
+  console.log("not$", resultText);
   // ":"를 기준으로 알아서 key와 value로 나눠줌
   Object.entries(obj).forEach(([key, value]) => {
     const label = {
@@ -67,18 +72,47 @@ function stringSplit(jsonString) {
 
     // value가 배열일 경우 예쁘게 줄바꿈 처리
     if (Array.isArray(value)) {
-      resultText += `${label}:\n${value.map(v => ` - ${v}`).join('\n')}\n\n`;
-    }
-    else{
+      resultText += `${label}:\n${value.map(v => ` - ${v}`).join('\n\n')}\n\n`;
+    } else {
       resultText += `${label}: ${value}\n\n`;
     }
   });
 
-  console.log("str", resultText);
+  console.log('str', resultText);
+
   // aiTalkRendering(resultText)
-  talkRendering("ai", resultText)
+  talkRendering('ai', resultText);
 }
 
+//======달러표시 지우기===///
+function notDollar(jsonString) {
+  function removeDollarSigns(text) {
+    // 백슬래시로 이스케이프된 $도 함께 제거하기 위해 \\$ 패턴도 고려
+    return text.replace(/\\?\$/g, '');
+  }
+
+  // 객체 내의 모든 문자열 값에서 $ 기호 제거
+  function processObject(data) {
+    for (const key in data) {
+      if (typeof data[key] === 'string') {
+        data[key] = removeDollarSigns(data[key]);
+      } else if (Array.isArray(data[key])) {
+        data[key] = data[key].map(item => {
+          if (typeof item === 'string') {
+            return removeDollarSigns(item);
+          }
+          return item;
+        });
+      } else if (typeof data[key] === 'object' && data[key] !== null) {
+        processObject(data[key]); // 중첩된 객체 처리 (현재 JSON 구조에서는 필요 없지만, 일반적인 처리 방식)
+      }
+    }
+    return data;
+  }
+  const processedObj = processObject(jsonString);
+  // 수정된 객체를 다시 JSON 문자열로 변환 (필요하다면)
+  const cleanedJsonString = JSON.stringify(processedObj, null, 2);
+}
 
 //===========프롬프트========//
 
@@ -121,27 +155,6 @@ ${inputQuestion}
   return prompt;
 }
 
-
-//=========렌더링===========//]
-/**
- * 누구에게 메세지를 렌더링 할지 정하는 함수
- * @param who 누구에게 하는지, 항상 문자열로 반환할 것
- * @param message 무슨 메세지를 전달할 건지
- */
-function talkRendering(who, message){
-  // 사용자 말풍선에 렌더링
-  if (who === "user"){
-    document.querySelector('.prev-question').textContent = message;
-  }
-  // ai 말풍선에 렌더링
-  else if (who === "ai"){
-    document.querySelector('.answer-box').textContent = message;
-  }
-  // 둘다 아닐시 오류원인 로그로 출력
-  else{
-    console.log("정확하게 누구인지 알려주세요");
-  }
-}
 
 //========변수 값 리턴==========//
 export function aiGet() {
