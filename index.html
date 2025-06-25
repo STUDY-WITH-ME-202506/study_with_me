@@ -6,21 +6,20 @@
     <title>Study With Me</title>
     <link rel="icon" href="img/favicon.ico">
     <link rel="stylesheet" href="CSS/main.css">
-    <script src="JS/todolist.js" defer></script>
+    <script type="module" src="JS/app.js"></script>
 </head>
 <body>
-    <header>
-        <div class="stopwatch-group">
-            <div class="stopwatch">⏱ 스톱워치</div>
-            <div>00:00:00</div>
-            <div class="stopwatch-buttons">
-                <button id="start">시작</button>
-                <button id="pause" disabled>일시정지</button>
-                <button id="reset">초기화</button>
-            </div>
+<header>
+    <div class="stopwatch-group">
+        <div class="stopwatch">⏱ 스톱워치</div>
+        <div class="stopwatch-display">00:00:00</div>
+        <div class="stopwatch-buttons">
+            <button id="start">시작</button>
+            <button id="pause" disabled>일시정지</button>
+            <button id="reset">초기화</button>
         </div>
 
-        <!--        <div class="logo">Study With Me</div>-->
+      
         <div class="logo">
             <img src="img/logo.png" alt="Study With Me logo">
         </div>
