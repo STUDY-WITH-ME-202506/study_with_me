@@ -11,7 +11,7 @@
 <body>
 <header>
     <div class="stopwatch-group">
-        <div class="stopwatch">⏱ 스톱워치</div>
+        <div class="stopwatch"><img class="stopwatch-img" src="img/stopwatch.png" alt="스톱워치 이미지"> 스톱워치</div>
         <div class="stopwatch-display">00:00:00</div>
         <div class="stopwatch-buttons">
             <button id="start">시작</button>
@@ -24,9 +24,17 @@
             <img src="img/logo.png" alt="Study With Me logo">
         </div>
 
-        <button id="openQuoteModal" class="quote-btn">📜 오늘의 명언</button>
+        <button id="openQuoteModal" class="quote-btn"><img class="quote-img" src="img/quote.png" alt="명언 이미지"> 오늘의 명언</button>
     </header>
-
+    <div id="break-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>휴식 시간이에요 ☕</h2>
+            <p class="quote-text" id="break-text">
+                50분 동안 열공했어요! 지금은 10분간 눈을 감거나 가볍게 스트레칭해보세요 😊
+            </p>
+            <button class="break-modal-btn">닫기</button>
+        </div>
+    </div>
     <!-- 모달창 -->
     <div id="quoteModal" class="modal-overlay">
         <div class="modal-content">

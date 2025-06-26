@@ -10,6 +10,10 @@ export function stopwatch() {
 
     const $stopWatchDisplay = document.querySelector('.stopwatch-display');
 
+    // 쉬는시간 모달 DOM
+    const $breakModal = document.querySelector('#break-modal')
+    const $closeBreakModalBtn = document.querySelector('.break-modal-btn')
+
     // 경과누적 시간 저장하기
     let elapsedTime = 0;
     // 스톱 워치 실행 여부
@@ -37,15 +41,34 @@ export function stopwatch() {
         isRunning = isStart;
     }
 
+    let hasShownBreak = false; // 모달이 한 번이라도 떴는지 확인 여부
+    let breakTargetTime = null; // 재개 후 목표 시간 재설정
+
     // 스톱워치 스타드
     function startStopwatch(e) {
 
         // 버튼 활성화 상태
         changeState(true);
 
+        const isTestMode = false; // true로 바꾸면 5초 뒤 모달 열림 (테스트 용)
+        const breakTime = isTestMode ? 5000 : 3000000; // 5초 : 50분
+
+        breakTargetTime = elapsedTime + breakTime; // 재개 할 떄마다 50분 목표 시간 설정
+
         timerIntervalId = setInterval(() => {
+
             // 시간을 계속 기록
             elapsedTime += 10;
+
+            if(!hasShownBreak && elapsedTime >= breakTargetTime){
+                clearInterval(timerIntervalId); //  타이머 멈춤
+                timerIntervalId = null;
+                isRunning = false; // 상태 반영
+                showBreakModal();
+                hasShownBreak = true; // 중복 방지
+                $pauseBtn.textContent = '재개'; // 버튼 상태도 반영
+            }
+
             // 화면에 렌더링
             formatElapsedTime();
         }, 10);
@@ -81,6 +104,8 @@ export function stopwatch() {
 
         elapsedTime = 0;
 
+        hasShownBreak = false;
+        breakTargetTime = null;
         $stopWatchDisplay.textContent = '00:00:00';
         $pauseBtn.textContent = '일시정지';
 
@@ -90,7 +115,27 @@ export function stopwatch() {
 
     }
 
+    // 쉬는 시간 모달 열림
+function showBreakModal(){
+        $breakModal.style.display = 'flex';
+    }
 
+    // 쉬는 시간 모달 닫기
+$closeBreakModalBtn.addEventListener('click',e => {
+    $breakModal.style.display = 'none';
+
+    // 쉬는 시간 종료 후 새 타이머 설정
+    const isTestMode = true;
+    const breakTime = isTestMode ? 5000 : 3000000;
+
+    hasShownBreak = false;
+    breakTargetTime = elapsedTime + breakTime;
+
+})
+
+
+
+ // 스톱워치 버튼 이벤트
     $startBtn.addEventListener('click', startStopwatch);
 
     $pauseBtn.addEventListener('click', pauseStopwatch);
