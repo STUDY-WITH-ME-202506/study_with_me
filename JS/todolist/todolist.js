@@ -1,4 +1,4 @@
-import { saveDeletedCount  } from './saveDeletedCount .js';
+import {saveDeletedCount} from './saveDeletedCount .js';
 
 export function todolist() {
 
@@ -25,6 +25,7 @@ export function todolist() {
 
         let todosToRender = [];
 
+        // 필터에 따라 렌더링할 todo 리스트를 걸러냄
         switch (state.currentFilter) {
             case 'all':
                 todosToRender = state.todos;
@@ -37,8 +38,10 @@ export function todolist() {
                 break;
         }
 
+        // 기존 ul 내부 비움
         $todoUl.innerHTML = '';
 
+        // 아무 항목도 없고, 전체 필터인 경우 '할 일이 없습니다' 메시지 표시
         if (todosToRender.length === 0 && state.currentFilter === 'all') {
             const $li = document.createElement('li');
             $li.classList.add('todo-empty');
@@ -47,37 +50,43 @@ export function todolist() {
             return;
         }
 
+        // 필터링된 항목들을 순회하며 li 요소 생성
         todosToRender.forEach(({id, text, completed}) => {
             const $li = document.createElement('li');
             $li.classList.add('todo-item');
 
+            // 완료 여부에 따라 클래스 부여
             if (completed) $li.classList.add('completed');
             else if (!completed && state.currentFilter === 'active') $li.classList.add('active');
 
             $li.dataset.id = id;
             $li.setAttribute('draggable', 'true');
 
+            // 리스트 아이템 구조 설정
             $li.innerHTML = `
-        <div class="item-container">
-          <input type="checkbox" class="todo-check" ${completed ? 'checked' : ''}>
-          <span class="todo-text">${text}</span>
-          <button class="delete-button">
-              <i class="fas fa-trash-alt"></i>
-          </button>
-        </div>
-      `;
+            <div class="item-container">
+                 <input type="checkbox" class="todo-check" ${completed ? 'checked' : ''}>
+                 <span class="todo-text">${text}</span>
+                 <button class="delete-button">
+                   <i class="fas fa-trash-alt"></i>
+                 </button>
+            </div>
+            `;
             addDragEvents($li);
             $todoUl.append($li);
         });
 
+        // 남은 할 일 개수 표시
         $todosLeftCount.textContent = state.todos.filter(todo => !todo.completed).length.toString();
 
+        // 필터 버튼 UI 업데이트 (선택된 버튼 강조)
         document.querySelectorAll('.filters button').forEach(($btn) => {
             if ($btn.id === `filter-${state.currentFilter}`) $btn.classList.add('active');
             else $btn.classList.remove('active');
         });
     }
 
+    // 확인 모달을 띄워서 사용자의 확인을 받은 뒤, `onConfirm()`을 실행
     function createConfirmModal(onConfirm) {
         const $confirmModal = document.createElement('div');
         $confirmModal.id = 'confirmModal';
@@ -108,23 +117,28 @@ export function todolist() {
         $todoList.appendChild($confirmModal);
     }
 
+    // 완료된 항목만 필터링해서 삭제하고, 삭제 개수를 로컬스토리지에 저장
     function clearCompletedTodos() {
         const deleted = state.todos.filter(todo => todo.completed);
+        // 삭제 개수를 로컬에 저장
         saveDeletedCount(deleted.length);
         state.todos = state.todos.filter(todo => !todo.completed);
         render();
     }
 
+    // 새로운 할 일을 목록에 추가하고 다시 렌더링
     function addTodo(newText) {
         state.todos.push({id: Date.now(), text: newText, completed: false});
         render();
     }
 
+    // 특정 ID를 가진 할 일을 목록에서 제거하고 다시 렌더링
     function deleteTodo(targetId) {
         state.todos = state.todos.filter(todo => todo.id !== targetId);
         render();
     }
 
+    // 특정 할 일의 완료 상태를 토글(완료 ↔ 미완료)하고 렌더링
     function toggleTodo(targetId) {
         state.todos = state.todos.map(todo =>
             todo.id === targetId ? {...todo, completed: !todo.completed} : todo
@@ -132,6 +146,7 @@ export function todolist() {
         render();
     }
 
+    // 모든 할 일을 한 번에 완료/미완료 상태로 토글
     function toggleAllTodos() {
         if (state.todos.length === 0) return;
         const allCompleted = state.todos.every(todo => todo.completed);
@@ -141,6 +156,7 @@ export function todolist() {
 
     let draggedElement = null;
 
+    // 드래그 앤 드롭 기능을 위해 할 일 항목에 필요한 이벤트를 부착
     function addDragEvents($li) {
         $li.addEventListener('dragstart', e => {
             draggedElement = e.currentTarget;
@@ -182,12 +198,13 @@ export function todolist() {
     }
 
 // ======== 이벤트 리스너 설정 ========== //
+    // 투두리스트 패널을 열거나 닫는 토글 버튼
     $todoToggleBtn.addEventListener('click', e => {
         const isOpen = $todoList.classList.toggle('show');
         $todoToggleBtn.style.right = isOpen ? '400px' : '0';
     })
 
-
+    // 필터 버튼 클릭 시 필터 상태를 변경하고 렌더링
     $filters.addEventListener('click', e => {
         if (!e.target.matches('button')) return;
         const buttonId = e.target.id;
@@ -195,10 +212,12 @@ export function todolist() {
         render();
     });
 
+    // 완료된 항목을 모두 삭제할지 확인하는 모달 띄움
     $clearCompletedBtn.addEventListener('click', e => {
         createConfirmModal(clearCompletedTodos);
     });
 
+    // 새로운 할 일을 입력하면 등록하고 인풋을 초기화
     $todoForm.addEventListener('submit', e => {
         e.preventDefault();
         const newTodoText = $todoInput.value.trim();
@@ -207,6 +226,7 @@ export function todolist() {
         $todoInput.focus();
     });
 
+    // 체크박스 클릭 시 완료 상태 변경, 삭제 버튼 클릭 시 삭제 모달 표시
     $todoUl.addEventListener('click', e => {
         const $li = e.target.closest('.todo-item');
         if (!$li) return;
@@ -218,6 +238,7 @@ export function todolist() {
         }
     });
 
+    // 모든 할 일을 한 번에 체크/해제
     $toggleAllBtn.addEventListener('click', toggleAllTodos);
 
     render();
