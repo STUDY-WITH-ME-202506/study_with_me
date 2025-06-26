@@ -40,38 +40,6 @@ function backtickRemove(jsonString){
   return jsonString;
 }
 
-//=======key : value======///
-/**
- * 문자열을 Key : value 형식으로 바꾸고 줄바꿈하는 함수
- * @param data 가공할 문자열
- * @return {string} 리턴 문자열
- */
-function keyValue(data){
-  let result =  '';//반환할 문자열
-
-  // ":"를 기준으로 알아서 key와 value로 나눠줌
-  Object.entries(data).forEach(([key, value]) => {
-    // prompt와 같은 형식으로 작성해 주세요.
-    const label = {
-      problemType: '문제 유형',
-      problemLevel: '문제 레벨',
-      problem: '문제',
-      problemOneLine: '문제 한줄 설명',
-      solvingOrder: ['문제 풀이'],
-      answer: '문제의 답',
-      tip: '비슷한 유형에서의 풀이법'
-    }[key] || key;
-
-    // value가 배열일 경우 예쁘게 줄바꿈 처리
-    if (Array.isArray(value)) {
-      result += `${label}:\n${value.map(v => ` - ${v}`).join('\n\n')}\n\n`;
-    } else {
-      result += `${label}: ${value}\n\n`;
-    }
-  });
-  return result; //문자열로 반환
-}
-
 //======달러표시 지우기===///
 /**
  * 문자열 중간에 있는 $를 제거하는 함수
@@ -106,4 +74,36 @@ function notDollar(data) {
   return processObject(data); // data를 전달
   // 수정된 객체를 다시 JSON 문자열로 변환 (필요하다면)
   // const cleanedJsonString = JSON.stringify(processedObj, null, 2);
+}
+
+//=======key : value======///
+/**
+ * 문자열을 Key : value 형식으로 바꾸고 줄바꿈하는 함수
+ * @param data 가공할 문자열
+ * @return {string} 리턴 문자열
+ */
+function keyValue(data){
+  let result =  '';//반환할 문자열
+
+  // ":"를 기준으로 알아서 key와 value로 나눠줌
+  Object.entries(data).forEach(([key, value]) => {
+    // prompt와 같은 형식으로 작성해 주세요.
+    const label = {
+      problemType: '문제 유형',
+      problemLevel: '문제 레벨',
+      problem: '문제',
+      problemOneLine: '문제 한줄 설명',
+      solvingOrder: ['문제 풀이'],
+      answer: '문제의 답',
+      tip: '비슷한 유형에서의 풀이법'
+    }[key] || key;
+
+    // value가 배열일 경우 예쁘게 줄바꿈 처리
+    if (Array.isArray(value)) {
+      result += `${label}:\n${value.map(v => ` - ${v}`).join('\n\n')}\n\n`;
+    } else {
+      result += `${label}: ${value}\n\n`;
+    }
+  });
+  return result; //문자열로 반환
 }
