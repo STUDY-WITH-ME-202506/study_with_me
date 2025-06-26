@@ -1,3 +1,4 @@
+
 import { saveDeletedCount  } from './saveDeletedCount .js';
 
 export function todolist() {
@@ -58,6 +59,7 @@ export function todolist() {
             $li.setAttribute('draggable', 'true');
 
             $li.innerHTML = `
+
         <div class="item-container">
           <input type="checkbox" class="todo-check" ${completed ? 'checked' : ''}>
           <span class="todo-text">${text}</span>
