@@ -6,7 +6,7 @@
     height: 100vh;
     background:black;
     position: fixed;
-    z-index: 998;
+    z-index: 500;
     opacity: 0.2;
     top: 0;
     left: 0;
@@ -21,7 +21,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    z-index: 999;
+    z-index: 550;
     margin: 3% auto;
 
 }
@@ -100,7 +100,7 @@
 
     color: #623909; /* 게이지 위에서 보일 텍스트 색상 */
 
-    z-index: 3;
+    z-index: 560;
 }
 
 .gauge-message{
@@ -259,11 +259,30 @@
 .achieve-circle.circle3{
 
     background: conic-gradient(
-            hsl(34, 100%, 50%) 180deg,
-            transparent 180deg);
+            hsl(34, 100%, 50%) 360deg,
+            transparent 360deg);
 }
 
 /* 텍스트 내용 조절 클래스*/
 /*.achieve-text.achieve1*/
 /*.achieve-text.achieve2*/
 /*.achieve-text.achieve3*/
+
+#modal-btn{
+    width: 20%;
+    height: 20%;
+    background: var(--todo-bg);
+    margin-top: 50%;
+    cursor: pointer;
+}
+#modal-btn img{
+    width: 100%;
+    height: 100%;
+    rotate: 5deg;
+}
+
+
+
+
+
+

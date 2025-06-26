@@ -9,8 +9,8 @@ export function playTime() {
     const $fillGauge = document.getElementById('fill-gauge');
     const $gaugeMessage = document.querySelector('.gauge-message.bottom');
     const [$question,$planner,$studyTime] = [...document.querySelectorAll('.achieve-stat')];
-    const $ac = [...document.querySelectorAll('.grade')];
-
+    const [$questionAc,$plannerAc,$studyTimeAc] = [...document.querySelectorAll('.grade')];
+    const [$circle1,$circle2,$circle3] = [...document.querySelectorAll('.achieve-circle')];
 
     // 유저의 목표시간 추후에 데이터 받아서 수정가능
     const goalTime = 180;
@@ -58,39 +58,46 @@ export function playTime() {
     }
 
     // 업적상황에 따라 GRADE 반영 하는 함수
-    function gradeMaker(time, ac) {
-      ac.forEach(ac =>
-        {
-            if (time.hours >= 0 && time.hours < 20) {
+    function gradeMaker(value, ac) {
+            if (value >= 0 && value < 20) {
                 ac.textContent = "C";
-            } else if (time.hours >= 20 && time.hours < 40) {
+            } else if (value >= 20 && value < 40) {
                 ac.textContent = "B";
-            } else if (time.hours >= 40 && time.hours < 60) {
+            } else if (value >= 40 && value < 60) {
                 ac.textContent = "A";
-            } else if (time.hours >= 60) {
+            } else if (value >= 60) {
                 ac.textContent = "S";
             }
-        });
     }
 
     // 업적 현황을 업적텍스트에 반영하는 함수
     function gradeStat(kindOfAchieve, achieve) {
-
+            let circleDegree = 0;
         if (kindOfAchieve >= 0 && kindOfAchieve < 20) {
             achieve.textContent = `${kindOfAchieve}/20`;
+            circleDegree = (kindOfAchieve / 20)*360;
         } else if (kindOfAchieve >= 20 && kindOfAchieve < 40) {
             achieve.textContent = `${kindOfAchieve - 20}/20`;
+            circleDegree = ((kindOfAchieve-20) / 20)*360
         } else if (kindOfAchieve >= 40 && kindOfAchieve < 60) {
             achieve.textContent = `${kindOfAchieve - 40}/20`;
+            circleDegree = ((kindOfAchieve-40) / 20)*360
         } else if (kindOfAchieve >= 60) {
             achieve.textContent = `${kindOfAchieve}`;
+            circleDegree = 360;
         }
+
+
     }
+
+
+
 
 
 // 모달 오픈시 가동 openModal 함수 안에서 작동함
     function isModalOpen() {
         totalTime = JSON.parse(localStorage.getItem('totalTime'));
+        let completedCount = JSON.parse(localStorage.getItem('completedDeleteCount'));
         // 총 시간을 분으로 환산
         totalTime.hours = 2; // 테스트위해 2시간 추가해둠
         const newTime = (totalTime.hours * 60) + totalTime.minutes;
@@ -107,8 +114,16 @@ export function playTime() {
             $gaugeMessage.textContent = `${totalTime.minutes}분 공부했어요!`;
         }
 
-        gradeMaker(totalTime, $ac);
+        // 업적 데이터 반영
+
+        gradeMaker(totalTime.hours, $studyTimeAc);
         gradeStat(totalTime.hours, $studyTime);
+
+        gradeMaker(completedCount, $plannerAc);
+        gradeStat(completedCount, $planner);
+
+
+
         // gradeStat(질문횟수, $question);
         // gradeStat(완료계획횟수, $planner);
 
