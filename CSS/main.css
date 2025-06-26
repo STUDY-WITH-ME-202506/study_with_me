@@ -4,3 +4,13 @@
 @import "aiQuestion.css";
 @import "playTime.css";
 @import "root.css";
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+            linear-gradient(transparent, transparent),
+            repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.02) 0, rgba(0, 0, 0, 0.02) 1px, transparent 1px, transparent 2px);
+    z-index: 0;
+}
