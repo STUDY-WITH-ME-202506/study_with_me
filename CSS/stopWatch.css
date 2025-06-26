@@ -2,7 +2,10 @@
     padding: 8px 12px;
     border-radius: 8px;
 }
-
+.stopwatch-img{
+    width: 35px;
+    display: block;
+}
 .stopwatch-group {
     display: flex;
     align-items: center;
@@ -16,6 +19,9 @@
 .stopwatch {
     font-weight: bold;
     font-size: 2rem;
+    display: flex; /* 플렉스 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    gap: 5px; /* 이미지와 텍스트 사이 여백 */
 }
 
 .stopwatch-buttons {
@@ -28,6 +34,13 @@
     font-size: 1rem;
     cursor: pointer;
     border-radius: 6px;
+    width: 70px;
+    text-align: center;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+.stopwatch-buttons button:not(:disabled):hover {
+    background-color: #ffe082;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
@@ -38,7 +51,10 @@
     font-size: 20px;
     color: var(--logo-color);
 }
-
+.quote-img{
+    width: 40px;
+    display: block;
+}
 /* 오늘의 명언 버튼 */
 .quote-btn {
     padding: 8px 12px;
@@ -49,7 +65,16 @@
     font-weight: bold;
     font-size: 2rem;
     height: 50px;
+    display: flex; /* 플렉스 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    gap: 5px; /* 이미지와 텍스트 사이 여백 */
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
+.quote-btn:hover {
+    background-color: #ffe082; /* hover 시 더 진하게 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* hover 효과 */
+}
+
 
 /* 모달 오버레이 */
 .modal-overlay {
@@ -118,6 +143,12 @@
     border-radius: 6px;
     background-color: #ccc;
     cursor: pointer;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+.modal-content button:hover {
+    background-color: #000080; /* hover 시 더 진하게 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* hover 효과 */
+    color: white;
 }
 /* 휴식 모달 전용 */
 #break-modal {
@@ -145,6 +176,9 @@
     font-weight: bold;
     color: var(--button-bg);
     margin-bottom: 20px;
+    display: flex; /* 플렉스 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    gap: 5px; /* 이미지와 텍스트 사이 여백 */
 }
 
 /* 메시지 본문 */
@@ -169,4 +203,12 @@
     color: white;
     font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+#break-modal .modal-content button:hover{
+
+    background-color: #000080; /* hover 시 더 진하게 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* hover 효과 */
+    color: white;
+
 }
