@@ -1,4 +1,4 @@
-import {saveTodoList} from './saveTodoList.js';
+import { saveDeletedCount  } from './saveDeletedCount .js';
 
 export function todolist() {
 
@@ -109,6 +109,8 @@ export function todolist() {
     }
 
     function clearCompletedTodos() {
+        const deleted = state.todos.filter(todo => todo.completed);
+        saveDeletedCount(deleted.length);
         state.todos = state.todos.filter(todo => !todo.completed);
         render();
     }
