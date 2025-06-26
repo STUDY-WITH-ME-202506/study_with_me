@@ -1,12 +1,58 @@
-
-
 .stopwatch, .quote-board, .logo {
     padding: 8px 12px;
     border-radius: 8px;
 }
+.stopwatch-img{
+    width: 35px;
+    display: block;
+}
+.stopwatch-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: var(--stopwatch-bg);
+    height: 50px;
+}
 
 .stopwatch {
-    background-color: var(--stopwatch-bg);
+    font-weight: bold;
+    font-size: 2rem;
+    display: flex; /* 플렉스 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    gap: 5px; /* 이미지와 텍스트 사이 여백 */
+}
+
+.stopwatch-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.stopwatch-buttons button {
+    padding: 5px 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 6px;
+    width: 70px;
+    text-align: center;
+    border: 1px solid var(--border-color);   /* ✅ 보더 추가 */
+    background-color: var(--usercard-bg);       /* ✅ 배경색 지정 */
+    color: var(--logo-color);               /* ✅ 글자색 지정 */
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+.stopwatch-buttons button:disabled {
+    background-color: #e0e0e0;    /* 연회색 배경 */
+    color: #999999;               /* 흐릿한 텍스트 색 */
+    border: 1px solid #cccccc;    /* 연한 테두리 */
+    cursor: not-allowed;
+    box-shadow: none;             /* 그림자 제거 */
+    opacity: 0.7;                 /* 살짝 흐릿하게 */
+}
+
+.stopwatch-buttons button:not(:disabled):hover {
+    background-color: #ffe082;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
@@ -17,14 +63,164 @@
     font-size: 20px;
     color: var(--logo-color);
 }
-
-.quote-board {
+.quote-img{
+    width: 40px;
+    display: block;
+}
+/* 오늘의 명언 버튼 */
+.quote-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
     background-color: var(--quote-bg);
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 2rem;
+    height: 50px;
+    display: flex; /* 플렉스 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    gap: 5px; /* 이미지와 텍스트 사이 여백 */
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+.quote-btn:hover {
+    background-color: #ffe082; /* hover 시 더 진하게 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* hover 효과 */
 }
 
-.container {
-    flex: 1;
-    display: flex;
-    position: relative;
-    overflow: hidden;
+
+/* 모달 오버레이 */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+/* 모달 내용 */
+.modal-content {
+    background-color: var(--answer-bg);
+    color: var(--logo-color);
+    padding: 30px 40px;
+    border-radius: 12px;
+    text-align: left;
+    max-width: 500px;
+    width: 80%;
+    line-height: 1.8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+}
+
+.modal-content h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--button-bg);
+    margin-bottom: 20px;
+}
+
+.modal-content .quote-name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--logo-color);
+}
+
+.modal-content .quote-profile {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 16px;
+}
+
+.modal-content .quote-text {
+    font-size: 1.5rem;
+    color: #333;
+    background-color: #ffffff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border-left: 4px solid var(--button-bg);
+    line-height: 1.6;
+    white-space: normal;
+}
+
+.modal-content button {
+    margin-top: 20px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #ccc;
+    cursor: pointer;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+.modal-content button:hover {
+    background-color: #000080; /* hover 시 더 진하게 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* hover 효과 */
+    color: white;
+}
+/* 휴식 모달 전용 */
+#break-modal {
+    display: none;
+}
+
+
+/* 휴식 모달 콘텐츠 */
+#break-modal .modal-content {
+    background-color: var(--todo-bg); /* 휴식용 밝은 배경 */
+    color: var(--logo-color);
+    padding: 30px 40px;
+    border-radius: 12px;
+    text-align: left;
+    max-width: 500px;
+    width: 80%;
+    line-height: 1.8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+}
+
+/* 제목 */
+#break-modal .modal-content h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--button-bg);
+    margin-bottom: 20px;
+    display: flex; /* 플렉스 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    gap: 5px; /* 이미지와 텍스트 사이 여백 */
+}
+
+/* 메시지 본문 */
+#break-modal .modal-content .quote-text {
+    font-size: 1.5rem;
+    background-color: #fff;
+    padding: 16px;
+    border-left: 4px solid var(--button-bg);
+    border-radius: 8px;
+    color: #333;
+    white-space: normal;
+    line-height: 1.6;
+}
+
+/* 닫기 버튼 */
+#break-modal .modal-content button {
+    margin-top: 20px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--button-bg);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+#break-modal .modal-content button:hover{
+
+    background-color: #000080; /* hover 시 더 진하게 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* hover 효과 */
+    color: white;
+
 }
