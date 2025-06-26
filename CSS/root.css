@@ -1,21 +1,20 @@
 
 :root {
-    --main-bg: #f4d9b8;
-    --header-bg: #FFEAC5;
-    --stopwatch-bg:#6C4E31;
+    --main-bg: #ffffff;
+    --header-bg: #ffffff;
+    --stopwatch-bg: #aab7b8;
     --logo-color: #000000;
-    --quote-bg: #6C4E31;
-    --ai-bg: FFDBB5;
-    --question-bg: #fdf6e3;
-    --answer-bg: #fdf6e3;
+    --quote-bg: #aab7b8;
+    --ai-bg: #ffffff;
+    --question-bg: #aab7b8;
+    --answer-bg: #f4f6f6;
     --input-bg: #ffffff;
     --todo-bg: #E6ECF0; /* 변경된 투두리스트 배경 색상 */
-    --button-bg: #6C4E31;
+    --button-bg: #000080;
     --button-color: #ffffff;
     --border-color: #aab7b8;
     --tab-bg: #aab7b8;
     --usercard-bg:#fdf6e3
-
 }
 
 body {
