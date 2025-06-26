@@ -48,3 +48,9 @@ header {
     height: 140px; /* 여기서 크기 조절! */
     object-fit: contain;
 }
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none; 
+}
