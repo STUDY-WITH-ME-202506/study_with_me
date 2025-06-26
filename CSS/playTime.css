@@ -15,7 +15,7 @@
 #user-card {
     width: 35%;
     height: 100%;
-    border: 10px solid #000080CC;
+    border: 10px solid #6C4E31;
     border-radius: 5%;
     background: var(--usercard-bg);
     display: flex;
@@ -220,7 +220,7 @@
 }
 #close-card-btn i{
     font-size: 4rem;
-    color: #000080CC;
+    color: #6C4E31CC;
 }
 
 

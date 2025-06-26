@@ -8,6 +8,8 @@ export function playTime() {
     const $closeCard = document.getElementById('close-card-btn');
     const $fillGauge = document.getElementById('fill-gauge');
     const $gaugeMessage = document.querySelector('.gauge-message.bottom');
+    const [$question,$planner,$studyTime] = [...document.querySelectorAll('.achieve-stat')];
+    const $ac = [...document.querySelectorAll('.grade')];
 
 
     // 유저의 목표시간 추후에 데이터 받아서 수정가능
@@ -38,47 +40,85 @@ export function playTime() {
             $fillGauge.style.width = `0%`
         })
     }
-            //퍼센트글씨가 바뀌는 애니메이션
-        function textOfPercent(percent,timeout) {
-            let countPercent = 0;
-            const interval = setInterval(() => {
-                const $timePer = [...document.querySelectorAll('.time-per')];
-                if (countPercent <= percent) {
-                    $timePer.forEach(time => {
-                        time.textContent = `${countPercent}%`;
-                        countPercent++;
-                    })
-                } else {
-                    clearInterval(interval);
-                }
-            }, timeout)
+
+    //퍼센트글씨가 바뀌는 애니메이션
+    function textOfPercent(percent, timeout) {
+        let countPercent = 0;
+        const interval = setInterval(() => {
+            const $timePer = [...document.querySelectorAll('.time-per')];
+            if (countPercent <= percent) {
+                $timePer.forEach(time => {
+                    time.textContent = `${countPercent}%`;
+                    countPercent++;
+                })
+            } else {
+                clearInterval(interval);
+            }
+        }, timeout)
+    }
+
+    // 업적상황에 따라 GRADE 반영 하는 함수
+    function gradeMaker(time, ac) {
+      ac.forEach(ac =>
+        {
+            if (time.hours >= 0 && time.hours < 20) {
+                ac.textContent = "C";
+            } else if (time.hours >= 20 && time.hours < 40) {
+                ac.textContent = "B";
+            } else if (time.hours >= 40 && time.hours < 60) {
+                ac.textContent = "A";
+            } else if (time.hours >= 60) {
+                ac.textContent = "S";
+            }
+        });
+    }
+
+    // 업적 현황을 업적텍스트에 반영하는 함수
+    function gradeStat(kindOfAchieve, achieve) {
+
+        if (kindOfAchieve >= 0 && kindOfAchieve < 20) {
+            achieve.textContent = `${kindOfAchieve}/20`;
+        } else if (kindOfAchieve >= 20 && kindOfAchieve < 40) {
+            achieve.textContent = `${kindOfAchieve - 20}/20`;
+        } else if (kindOfAchieve >= 40 && kindOfAchieve < 60) {
+            achieve.textContent = `${kindOfAchieve - 40}/20`;
+        } else if (kindOfAchieve >= 60) {
+            achieve.textContent = `${kindOfAchieve}`;
         }
-
-
+    }
 
 
 // 모달 오픈시 가동 openModal 함수 안에서 작동함
     function isModalOpen() {
         totalTime = JSON.parse(localStorage.getItem('totalTime'));
         // 총 시간을 분으로 환산
-        // totalTime.hours = 1; // 테스트위해 2시간 추가해둠
+        totalTime.hours = 2; // 테스트위해 2시간 추가해둠
         const newTime = (totalTime.hours * 60) + totalTime.minutes;
         const percentOfTime = Math.floor((newTime / goalTime) * 100)
 
         // 오늘 공부게이지 퍼센트 텍스트 반영
-        textOfPercent(percentOfTime,10);
+        textOfPercent(percentOfTime, 10);
         // 게이지 차는 애니메이션
-        setTimeout(() => $fillGauge.style.width = `${percentOfTime}%`,300);
+        setTimeout(() => $fillGauge.style.width = `${percentOfTime}%`, 300);
 
-        if(totalTime.hours > 0) {
+        if (totalTime.hours > 0) {
             $gaugeMessage.textContent = `${totalTime.hours}시간 ${totalTime.minutes}분 공부했어요!`;
-        }else{
+        } else {
             $gaugeMessage.textContent = `${totalTime.minutes}분 공부했어요!`;
         }
 
+        gradeMaker(totalTime, $ac);
+        gradeStat(totalTime.hours, $studyTime);
+        // gradeStat(질문횟수, $question);
+        // gradeStat(완료계획횟수, $planner);
+
+        //단계설정
+        //  0개  20개 40개 60개이상
+        //  C     B     A     S
+        //    0/20  n/20  n/40  n/60
+
+
     }
-
-
     openModal();
     closeModal();
 
