@@ -19,7 +19,7 @@
             <button id="reset">초기화</button>
         </div>
     </div>
-      
+
         <div class="logo">
             <img src="img/logo.png" alt="Study With Me logo">
         </div>
@@ -47,15 +47,20 @@
         <section class="new-todo">
             <form id="todo-form">
                 <input type="text" id="todo-input" placeholder="할 일을 입력하세요">
-                <button>+</button>
+                <button><i class="fas fa-folder-plus"></i></button>
             </form>
+        </section>
+
+        <section class="toggle-all-wrapper">
+            <button id="toggle-all-button" class="toggle-all-button" title="모두 완료/해제">
+                <i class="far fa-check-square"></i>
+                <span>전체 선택</span>
+            </button>
         </section>
 
         <section class="todos">
             <ul id="todo-ul"></ul>
         </section>
-
-        <!--        <button class="todo-toggle"><</button>-->
 
         <div class="todo-tabs">
             <div class="todo-controls">
@@ -68,11 +73,13 @@
                     <button id="filter-completed">완료됨</button>
                 </div>
                 <button id="clear-completed" class="clear-button">완료된 항목 삭제</button>
+
             </div>
         </div>
+        <button id="modal-btn"></button>
     </div>
 
-    <button id="todo-toggle-btn">&lt;</button>
+    <button id="todo-toggle-btn"><i class="fas fa-edit"></i></button>
 
     <div class="container">
         <div class="ai-section">
