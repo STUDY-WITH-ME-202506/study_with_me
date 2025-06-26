@@ -2,13 +2,15 @@
 .todo-list {
     position: fixed;
     top: 80px;
-    right: -400px; /* 처음엔 화면 밖 */
+    right: -400px;
     width: 400px;
     height: calc(100vh - 80px);
     background-color: var(--todo-bg, #ffffff);
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
     transition: right 0.3s ease;
-    z-index: 9;
+
+    z-index: 99;
+
     display: flex;
     flex-direction: column;
     padding: 15px;
@@ -19,7 +21,6 @@
 }
 
 /* --- 2. 제목 --- */
-
 .main-title {
     font-size: 30px;
     font-weight: 700;
@@ -29,16 +30,15 @@
 }
 
 /* --- 3. 새 할 일 입력 폼 --- */
-
 .new-todo {
     display: flex;
     gap: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
 }
 
 .new-todo form {
     display: flex;
-    gap: 8px;
+    gap: 5px;
     width: 100%;
 }
 
@@ -51,6 +51,7 @@
     outline: none;
     transition: border-color 0.2s;
 }
+
 .new-todo input:focus {
     border-color: #6dbaf7;
 }
@@ -71,6 +72,32 @@
     background-color: #0D6EFDFF;
 }
 
+/* ---  전체 선택 버튼 --- */
+.toggle-all-wrapper {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.toggle-all-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #6B7280FF;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.toggle-all-button:hover {
+    background-color: #f3f4f6;
+    color: #0D6EFDFF;
+}
+
 /* --- 4. 할 일 목록 --- */
 .todos {
     min-height: 200px;
@@ -87,7 +114,7 @@
     background-color: #e0f7ff;
     border-left: 10px solid #90dfff;
     padding: 16px;
-    margin-top: 20px;
+    margin-top: 4px;
     margin-bottom: 20px;
     border-radius: 8px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
@@ -110,6 +137,14 @@
     transition: background-color 0.3s;
     font-weight: 500;
     font-size: 15px;
+}
+
+.todo-item.dragging {
+    opacity: 0.5;
+}
+
+.todo-item.drag-over {
+    border-top: 2px solid #3B82F6FF;
 }
 
 /* 할 일이 진행 중 되었을 때의 스타일 */
@@ -137,7 +172,6 @@
 }
 
 /* 5. 가운데 화살표 버튼*/
-
 #todo-toggle-btn {
     position: fixed;
     top: 50%;
@@ -151,13 +185,14 @@
     height: 40px;
     font-size: 24px;
     font-weight: bold;
-    z-index: 100;
+
+    z-index: 101;
+
     cursor: pointer;
     transition: right 0.3s ease;
 }
 
 /* --- 6. 필터 및 관리 --- */
-
 .todo-tabs {
     padding-top: 15px;
     border-top: 1px solid var(--border-color);
@@ -202,7 +237,6 @@
 }
 
 /* 현재 활성화된 필터 버튼 스타일 */
-
 #filter-all.active {
     background-color: #ffffff;
     color: #3B82F6;
@@ -224,7 +258,6 @@
     border-radius: 6px;
 }
 
-
 /* 완료된 항목 삭제 버튼 스타일 */
 #clear-completed {
     padding: 8px;
@@ -243,9 +276,71 @@
 }
 
 
-#modal-btn{
-    margin-top: 10%;
-    align-self: center;
-    width: 30%;
-    height: 10%;
+.modal-overlay-internal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 배경 어두움 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
 }
+
+.modal-overlay-internal .modal-content {
+    background-color: #fff;
+    padding: 25px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    max-width: 320px;
+    width: 90%;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.modal-overlay-internal .modal-content p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.modal-overlay-internal .modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.modal-overlay-internal #confirmYes {
+    background-color: #3B82F6;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.modal-overlay-internal #confirmNo {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.modal-overlay-internal #confirmYes:hover {
+    background-color: #2563eb;
+}
+
+.modal-overlay-internal #confirmNo:hover {
+    background-color: #dc2626;
+}
+
+

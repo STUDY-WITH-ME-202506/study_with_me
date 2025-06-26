@@ -9,24 +9,33 @@
     <script type="module" src="JS/app.js"></script>
 </head>
 <body>
-    <header>
-        <div class="stopwatch-group">
-            <div class="stopwatch">⏱ 스톱워치</div>
-            <div class="stopwatch-display">00:00:00</div>
-            <div class="stopwatch-buttons">
-                <button id="start">시작</button>
-                <button id="pause" disabled>일시정지</button>
-                <button id="reset">초기화</button>
-            </div>
+
+<header>
+    <div class="stopwatch-group">
+        <div class="stopwatch"><img class="stopwatch-img" src="img/stopwatch.png" alt="스톱워치 이미지"> 스톱워치</div>
+        <div class="stopwatch-display">00:00:00</div>
+        <div class="stopwatch-buttons">
+            <button id="start">시작</button>
+            <button id="pause" disabled>일시정지</button>
+            <button id="reset">초기화</button>
         </div>
+    </div>
 
         <div class="logo">
             <img src="img/logo.png" alt="Study With Me logo">
         </div>
 
-        <button id="openQuoteModal" class="quote-btn">📜 오늘의 명언</button>
+        <button id="openQuoteModal" class="quote-btn"><img class="quote-img" src="img/quote.png" alt="명언 이미지"> 오늘의 명언</button>
     </header>
-
+    <div id="break-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>휴식 시간이에요 ☕</h2>
+            <p class="quote-text" id="break-text">
+                50분 동안 열공했어요! 지금은 10분간 눈을 감거나 가볍게 스트레칭해보세요 😊
+            </p>
+            <button class="break-modal-btn">닫기</button>
+        </div>
+    </div>
     <!-- 모달창 -->
     <div id="quoteModal" class="modal-overlay">
         <div class="modal-content">
@@ -47,15 +56,20 @@
         <section class="new-todo">
             <form id="todo-form">
                 <input type="text" id="todo-input" placeholder="할 일을 입력하세요">
-                <button>+</button>
+                <button><i class="fas fa-folder-plus"></i></button>
             </form>
+        </section>
+
+        <section class="toggle-all-wrapper">
+            <button id="toggle-all-button" class="toggle-all-button" title="모두 완료/해제">
+                <i class="far fa-check-square"></i>
+                <span>전체 선택</span>
+            </button>
         </section>
 
         <section class="todos">
             <ul id="todo-ul"></ul>
         </section>
-
-        <!--                <button class="todo-toggle"><</button>-->
 
         <div class="todo-tabs">
             <div class="todo-controls">
@@ -68,13 +82,15 @@
                     <button id="filter-completed">완료됨</button>
                 </div>
                 <button id="clear-completed" class="clear-button">완료된 항목 삭제</button>
+
             </div>
         </div>
-<!--        백승현 멋대로버튼-->
+
         <button id="modal-btn"></button>
     </div>
 
-        <button id="todo-toggle-btn">&lt;</button>
+    <button id="todo-toggle-btn"><i class="fas fa-edit"></i></button>
+
 
     <div class="container">
         <div class="ai-section">
