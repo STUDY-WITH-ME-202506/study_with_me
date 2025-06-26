@@ -1,19 +1,19 @@
-/* --- 1. 전체 컨테이너 --- */
+/* --- 투두리스트 컨테이너 --- */
+
 .todo-list {
     position: fixed;
     top: 80px;
-    right: -400px;
+    right: -450px;
     width: 400px;
     height: calc(100vh - 80px);
-    background-color: var(--todo-bg, #ffffff);
-    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
-    transition: right 0.3s ease;
-
+    background-color: var(--bg-main);
+    box-shadow: -4px 0 15px var(--shadow-color);
+    transition: right 0.4s ease-in-out;
     z-index: 99;
-
     display: flex;
     flex-direction: column;
-    padding: 15px;
+    padding: 20px;
+    border-left: 1px solid var(--border-color);
 }
 
 .todo-list.show {
@@ -22,46 +22,48 @@
 
 /* --- 2. 제목 --- */
 .main-title {
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 700;
-    color: #6dbaf7;
+    color: var(--secondary-accent); ;
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 /* --- 3. 새 할 일 입력 폼 --- */
 .new-todo {
-    display: flex;
-    gap: 5px;
-    margin-bottom: 4px;
+    margin-bottom: 15px;
 }
 
 .new-todo form {
     display: flex;
-    gap: 5px;
+    gap: 10px;
     width: 100%;
 }
 
 .new-todo input {
     flex-grow: 1;
     padding: 12px 15px;
-    font-size: 16px;
-    border: 2px solid #d5dee4;
+    font-size: 1.5rem;
+    font-family: 'Nunito', sans-serif;
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     outline: none;
-    transition: border-color 0.2s;
+    background-color: var(--bg-widget);
+    color: var(--text-main);
+    transition: all 0.3s ease;
 }
 
 .new-todo input:focus {
-    border-color: #6dbaf7;
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.2);
 }
 
 .new-todo button {
     flex-shrink: 0;
     width: 50px;
     height: 50px;
-    font-size: 28px;
-    background-color: #6dbaf7;
+    font-size: 24px;
+    background-color: var(--primary-accent);
     color: white;
     border-radius: 10px;
     transition: background-color 0.2s;
@@ -69,40 +71,46 @@
 }
 
 .new-todo button:hover {
-    background-color: #0D6EFDFF;
+    background-color: var(--primary-accent-dark);
 }
 
 /* ---  전체 선택 버튼 --- */
 .toggle-all-wrapper {
     display: flex;
     justify-content: flex-start;
+    margin-bottom: 10px;
 }
 
 .toggle-all-button {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 2px 12px;
+    gap: 8px;
+    padding: 4px 10px;
     font-size: 14px;
+    font-weight: 600;
     border: none;
     border-radius: 8px;
     background-color: transparent;
-    color: #6B7280FF;
+    color: var(--text-subtle);
     cursor: pointer;
-    white-space: nowrap;
     transition: all 0.2s;
 }
 
 .toggle-all-button:hover {
-    background-color: #f3f4f6;
-    color: #0D6EFDFF;
+    background-color: var(--bg-subtle);
+    color: var(--primary-accent);
 }
 
 /* --- 4. 할 일 목록 --- */
 .todos {
+    /*min-height: 200px;*/
+    /*max-height: 40vh;*/
+    /*overflow-y: auto;*/
+    flex-grow: 1; /* 남은 공간을 모두 차지하도록 */
     min-height: 200px;
-    max-height: 40vh;
+    max-height: 55vh; /* 높이 유연하게 조정 */
     overflow-y: auto;
+    padding-right: 5px; /* 스크롤바 공간 확보 */
 }
 
 #todo-list {
@@ -111,32 +119,35 @@
 
 /* 할 일이 입력 안 되었을 때의 스타일 */
 .todo-empty {
-    background-color: #e0f7ff;
-    border-left: 10px solid #90dfff;
-    padding: 16px;
-    margin-top: 4px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-    font-style: italic;
-    color: #444;
-    font-size: 1.1rem;
+    background-color: transparent;
+    border: 2px dashed var(--border-color);
+    padding: 40px 20px;
+    margin-top: 20px;
+    border-radius: 12px;
     text-align: center;
+    color: var(--text-subtle);
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-style: normal;
     transition: all 0.3s ease;
+    box-shadow: none;
 }
 
+/* --- 할 일 아이템 --- */
 .todo-item {
-    background-color: #fff9cc;
-    border-left: 10px solid #ffe066;
-    border-radius: 8px;
-    padding: 12px;
+    background-color: var(--bg-widget);
+    border: 1px solid var(--border-color);
+    border-left: 10px solid var(--primary-accent); /* 기본 상태는 주황색으로 강조 */
+    border-radius: 10px;
+    padding: 12px 15px;
     margin-bottom: 10px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    transition: background-color 0.3s;
-    font-weight: 500;
-    font-size: 15px;
+    gap: 12px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 4px var(--shadow-color);
 }
 
 .todo-item.dragging {
@@ -144,17 +155,16 @@
 }
 
 .todo-item.drag-over {
-    border-top: 2px solid #3B82F6FF;
+    border-top: 2px solid #fff;
 }
 
 /* 할 일이 진행 중 되었을 때의 스타일 */
 .todo-item.active {
-    background-color: #e6ffe6;
-    border-left: 10px solid #98e698;
+    border-left: 10px solid #81c784;;
+    background-color: #f0fff4;
 }
 
 /* 할 일이 완료되었을 때의 스타일 */
-
 .todo-item.completed {
     background-color: #ffe5e5;
     border-left: 10px solid #ff9d9d;
@@ -164,68 +174,78 @@
 
 .todo-item.completed .todo-text {
     text-decoration: line-through;
-    color: #9CA3AFFF;
+    color: var(--text-subtle);
 }
 
 .todo-item input[type="checkbox"] {
     transform: scale(1.2);
+    cursor: pointer;
 }
 
-/* 5. 가운데 화살표 버튼*/
+/* --- 투두리스트 토글 버튼 --- */
 #todo-toggle-btn {
     position: fixed;
     top: 50%;
     right: 0;
     transform: translateY(-50%);
-    background-color: #3B82F6FF;
+    background-color: var(--primary-accent);
     color: white;
     border: none;
-    border-radius: 8px 0 0 8px;
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
-    font-weight: bold;
-
+    border-radius: 12px 0 0 12px;
+    width: 35px;
+    height: 70px;
+    font-size: 20px;
     z-index: 101;
-
     cursor: pointer;
-    transition: right 0.3s ease;
+    transition: all 0.4s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: -2px 2px 8px var(--shadow-color);
+}
+#todo-toggle-btn:hover {
+    background-color: var(--primary-accent-dark);
 }
 
 /* --- 6. 필터 및 관리 --- */
 .todo-tabs {
+    margin-top: auto;
     padding-top: 15px;
     border-top: 1px solid var(--border-color);
 }
 
 .todo-controls {
-    background-color: #ffffff;
-    border: 1px solid #d1d5db;
+    background-color: var(--bg-widget);
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     padding: 15px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    font-size: 14px;
-    color: #6B7280;
+    gap: 15px;
+    font-size: 1.2rem;
+    color: var(--text-main);
+    box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .todos-left {
-    font-weight: 600;
+    font-weight: 700;
+}
+
+.filters {
+    display: flex;
+    gap: 8px;
+    background-color: var(--bg-subtle);
+    border-radius: 8px;
+    padding: 4px;
 }
 
 .filter-buttons {
-    display: flex;
-    gap: 8px;
-}
-
-.filter-buttons button {
     flex: 1;
     padding: 8px;
     border-radius: 6px;
     border: none;
-    background-color: #d1d5db;
-    color: #fff;
+    background-color: transparent;
+    color: var(--text-subtle);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
@@ -234,47 +254,47 @@
 /* 필터 버튼 hover */
 .filter-buttons button:hover {
     filter: brightness(1.1);
+    color: var(--text-main);
 }
 
 /* 현재 활성화된 필터 버튼 스타일 */
 #filter-all.active {
-    background-color: #ffffff;
-    color: #3B82F6;
-    border: 1px solid #3B82F6;
+    background-color: var(--bg-widget);
+    color: var(--primary-accent);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     border-radius: 6px;
 }
 
 #filter-active.active {
-    background-color: #ffffff;
+    background-color: var(--bg-widget);
     color: #68c97c;
-    border: 1px solid #68c97c;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     border-radius: 6px;
 }
 
 #filter-completed.active {
-    background-color: #ffffff;
+    background-color: var(--bg-widget);
     color: #f87171;
-    border: 1px solid #f87171;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     border-radius: 6px;
 }
 
 /* 완료된 항목 삭제 버튼 스타일 */
 #clear-completed {
-    padding: 8px;
+    padding: 10px;
     border-radius: 6px;
     border: none;
-    background-color: #d1d5db;
-    color: #ffffff;
+    background-color: #f5f5f5;
+    color: var(--text-subtle);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 #clear-completed:hover {
-    color: #EF4444FF;
-    border-color: #EF4444;
+    background-color: var(--bg-widget);
+    color: #c62828;
 }
-
 
 .modal-overlay-internal {
     position: absolute;
@@ -282,7 +302,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 배경 어두움 */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -290,44 +310,45 @@
 }
 
 .modal-overlay-internal .modal-content {
-    background-color: #fff;
-    padding: 25px 20px;
-    border-radius: 12px;
+    background-color: var(--bg-main);
+    padding: 30px;
+    border-radius: 16px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
     max-width: 320px;
     width: 90%;
     text-align: center;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Nunito', sans-serif;
+    border: 1px solid var(--border-color);
 }
 
 .modal-overlay-internal .modal-content p {
-    margin: 8px 0;
+    margin: 0 0 20px 0;
     font-size: 14px;
-    color: #333;
+    font-weight: 600;
+    color: var(--text-main);
+    line-height: 1.5;
 }
 
 .modal-overlay-internal .modal-buttons {
     display: flex;
     justify-content: center;
     gap: 12px;
-    margin-top: 16px;
 }
 
 .modal-overlay-internal #confirmYes {
-    background-color: #3B82F6;
+    background-color: #e57373;
     color: white;
     border: none;
     padding: 8px 14px;
     border-radius: 6px;
-    cursor: pointer;
     font-size: 14px;
     font-weight: bold;
 }
 
 .modal-overlay-internal #confirmNo {
-    background-color: #ef4444;
-    color: white;
-    border: none;
+    background-color: var(--bg-widget);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
     padding: 8px 14px;
     border-radius: 6px;
     cursor: pointer;
@@ -336,11 +357,11 @@
 }
 
 .modal-overlay-internal #confirmYes:hover {
-    background-color: #2563eb;
+    background-color: #d32f2f;
 }
 
 .modal-overlay-internal #confirmNo:hover {
-    background-color: #dc2626;
+    background-color: var(--bg-subtle);
 }
 
 
