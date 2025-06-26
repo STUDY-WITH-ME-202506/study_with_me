@@ -1,5 +1,5 @@
-import {talkRendering, stringSplit} from './aiRendering.js';
-import {backtickRemove} from './cleanString.js';
+import {talkRendering,clearText} from './aiRendering.js';
+import {stringSplit} from './cleanString.js';
 
 
 //======== 변수 정의 ========//
@@ -13,15 +13,16 @@ let inputQuestion = '';// 질문 내용
 
 //=========함수 정의=========//
 
-
-async function aiQuestion(inputQuestion){
-  inputQuestion = textInput.value; // 사용자가 입력한 질문 내용 = textInput.value; // 사용자가 입력한 질문 내용
-  const prompt =generatePrompt(userInfo, inputQuestion)//유저정보와 질문내용을 템플릿에 담은 프롬프트
+/**
+ * 직접 ai 에게 질문하고 답변받는 함수
+ * @param inputQuestion 질문할 내용
+ * @return {Promise<any>} 반활할 JSON
+ */
+async function aiQuestion(inputQuestion) {
+  const prompt = generatePrompt(userInfo, inputQuestion);//유저정보와 질문내용을 템플릿에 담은 프롬프트
   const gemini = {contents: [{parts: [{text: prompt}]}]};// 제미나이에게 질문하기
 
-  textInput.value = '';// 질문창 내용 초기화
-
-  talkRendering('user', inputQuestion);// 사용자가 입력한 질문 렌더링
+  clearText(textInput); //입력창 초기화
 
   // 제미나이에게 문자 질문하는 형식
   const res = await fetch(url, {
@@ -29,23 +30,13 @@ async function aiQuestion(inputQuestion){
     headers: {'Content-Type': 'application/json'}, // 제이슨 타입
     body: JSON.stringify(gemini) //JSON의 string 타입으로 변환
   });
-  // res가 괜찮지 않다면
-  if (!res.ok) {
-    //res의 상태를 내보내기
-    throw new Error(`HTTP error! Status: ${res.status}`);
-  }
-  return res;
-}
 
-async function aiAnswer(){
-  const res = await aiQuestion();
-  // 질문의 답변을 json 으로 변환하기
+  // res가 괜찮지 않다면 res의 상태를 내보내기
+  if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+
+  // 이곳에서 응답 본문을 JSON 객체로 파싱
   const result = await res.json();
-  // 답변에서 필요한 문자열만 따로 빼내기
-  let problemJsonString = result.candidates[0].content.parts[0].text;
-  // backtickRemove의 반환값을 problemJsonString에 다시 할당합니다.
-  problemJsonString = backtickRemove(problemJsonString);
-  return problemJsonString;
+  return result; // 이건 JSON 객체
 }
 
 /**
@@ -55,14 +46,20 @@ async function aiAnswer(){
 // async가 함수 앞에 있어야 await을 쓸 수 있음
 // await은 리턴 값이 오기 전까지 기다림
 async function aiCall() {
-  aiQuestion()
-  const problemJsonString = await aiAnswer()
+  inputQuestion = textInput.value;// 사용자가 입력한 질문 내용 = textInput.value;
+  talkRendering('user', inputQuestion);// 사용자가 입력한 질문 렌더링
+
+  const res = await aiQuestion(inputQuestion);// 질분답변을 JSON 객체로 파싱해서 받음
+  const problemJsonString = res.candidates[0].content.parts[0].text;// text 부분 추출
+
   talkRendering('ai', stringSplit(problemJsonString));// 답변 렌더링하기
 }
+
+
 //===========프롬프트========//
 /**
  * @description Gemini API 에게 보낼 프롬프트를 생성합니다.
- * @param userInfo - 질문자 정보
+ * @param userInfo - 사용자 정보
  * @param inputQuestion - 인풋 받은 문제
  * @returns {string} - 완성된 프롬프트 문자열
  */
@@ -101,7 +98,7 @@ ${inputQuestion}
 
 //========변수 값 리턴==========//
 export function aiGet() {
-  aiCall(); // 호출만 하고 결과는 console에 출력됨
+  aiCall(); //ai 호출 함수
 }
 
 // 질문 카운트 만들기
