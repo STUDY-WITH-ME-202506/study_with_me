@@ -113,7 +113,7 @@ export function playTime() {
         totalTime = JSON.parse(localStorage.getItem('totalTime'));
         let completedCount = JSON.parse(localStorage.getItem('completedDeleteCount'));
         // 총 시간을 분으로 환산
-        totalTime.hours = 10; // 테스트위해 2시간 추가해둠
+        totalTime.hours = 2; // 테스트위해 2시간 추가해둠
         const newTime = (totalTime.hours * 60) + totalTime.minutes;
         let percentOfTime = (newTime / goalTime) * 100;
 

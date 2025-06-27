@@ -90,22 +90,27 @@
     box-shadow: 0 2px 8px var(--shadow-color);
     border-radius: 12px; /* 전체 영역을 둥글게 */
     overflow: hidden; /* 자식 요소가 삐져나오지 않도록 */
+    border: 1px solid var(--border-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+.input-area:focus-within {
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.3); /* 포커스를 더 잘보이게 하는 효과 */
+}
+
 
 .input-area input {
     flex: 1;
     padding: 14px 16px;
-    border: 1px solid var(--border-color);
-    border-right: none;
     background-color: var(--bg-widget);
     color: var(--text-main);
     font-size: 1rem;
-    transition: border-color 0.3s ease;
+    border: none;
 }
 
 .input-area input:focus {
     outline: none;
-    border-color: var(--primary-accent);
 }
 
 .input-area button {
