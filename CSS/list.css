@@ -233,13 +233,14 @@
 
 .filters {
     display: flex;
+    justify-content: center;
     gap: 8px;
     background-color: var(--bg-subtle);
     border-radius: 8px;
     padding: 4px;
 }
 
-.filter-buttons {
+.filters-button {
     flex: 1;
     padding: 8px;
     border-radius: 6px;
@@ -252,10 +253,15 @@
 }
 
 /* 필터 버튼 hover */
-.filter-buttons button:hover {
-    filter: brightness(1.1);
-    color: var(--text-main);
+#filter-all:hover,
+#filter-active:hover,
+#filter-completed:hover {
+    background-color: var(--primary-accent);
+    color: white;
+    filter: none;
+    border-radius: 6px;
 }
+
 
 /* 현재 활성화된 필터 버튼 스타일 */
 #filter-all.active {
