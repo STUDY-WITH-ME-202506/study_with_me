@@ -90,7 +90,7 @@ export function playTime() {
         }
         let intervalLimit = 0;
         let hslHandle;
-        let hue=160;
+        let hue=170;
         const intervalHandle = setInterval(() => {
             if (intervalLimit <= circleDegree) {// hue 조절부 240부터 시작
                 hslHandle = hslHandle < 2 ? 1 : hue - (intervalLimit / 2);
