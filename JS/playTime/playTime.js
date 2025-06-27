@@ -90,7 +90,7 @@ export function playTime() {
         }
         let intervalLimit = 0;
         let hslHandle;
-        let hue=160;
+        let hue=170;
         const intervalHandle = setInterval(() => {
             if (intervalLimit <= circleDegree) {// hue 조절부 240부터 시작
                 hslHandle = hslHandle < 2 ? 1 : hue - (intervalLimit / 2);
@@ -103,7 +103,7 @@ export function playTime() {
             } else {
                 clearInterval(intervalLimit);
             }
-        }, 10)
+        }, 20)
 
     }// 함수 끝부분
 
@@ -112,6 +112,9 @@ export function playTime() {
     function isModalOpen() {
         totalTime = JSON.parse(localStorage.getItem('totalTime'));
         let completedCount = JSON.parse(localStorage.getItem('completedDeleteCount'));
+        let questionCount = JSON.parse(localStorage.getItem('questionCount'));
+
+        console.log(questionCount);
         // 총 시간을 분으로 환산
         totalTime.hours = 2; // 테스트위해 2시간 추가해둠
         const newTime = (totalTime.hours * 60) + totalTime.minutes;
@@ -131,17 +134,17 @@ export function playTime() {
         }
 
         // 업적 데이터 반영
+        //circle1
+        gradeMaker(questionCount, $questionAc);
+        gradeStat(questionCount, $question, $circle1);
 
-        //circle3
-        gradeMaker(totalTime.hours, $studyTimeAc);
-        gradeStat(totalTime.hours, $studyTime, $circle3);
         //circle2
         gradeMaker(completedCount, $plannerAc);
         gradeStat(completedCount, $planner, $circle2);
 
-
-        // gradeStat(질문횟수, $question);
-        // gradeStat(완료계획횟수, $planner);
+        //circle3
+        gradeMaker(totalTime.hours, $studyTimeAc);
+        gradeStat(totalTime.hours, $studyTime, $circle3);
 
         //단계설정
         //  0개  20개 40개 60개이상
@@ -153,5 +156,4 @@ export function playTime() {
 
     openModal();
     closeModal();
-
 }
