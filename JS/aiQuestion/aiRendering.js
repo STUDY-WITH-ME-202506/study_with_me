@@ -15,7 +15,7 @@ export function talkRendering(who, message){
   }
   // ai 문제 풀이 풍선에 렌더링
   else if (who === "aiSol"){
-    document.querySelector('.answer-box').textContent = message;
+    document.querySelector('.solving-box').textContent = message;
   }
 
   // 둘다 아닐시 오류원인 로그로 출력
