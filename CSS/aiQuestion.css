@@ -1,3 +1,4 @@
+/*
 .container {
     flex: 1;
     display: flex;
@@ -16,7 +17,7 @@
     box-sizing: border-box;
 }
 
-/* 투두리스트가 열렸을 때 AI 영역을 줄임 */
+!* 투두리스트가 열렸을 때 AI 영역을 줄임 *!
 .todo-list.show ~ .ai-section {
     margin-right: 50vw;
 }
@@ -67,4 +68,97 @@
     border-radius: 0 6px 6px 0;
     color: var(--button-color);
     cursor: pointer;
+}
+*/
+
+.container {
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    padding: 20px; /* 컨테이너에 패딩 추가 */
+}
+
+.ai-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: margin-right 0.4s ease-in-out; /* 전환 효과 부드럽게 */
+    box-sizing: border-box;
+    gap: 20px; /* 요소 간 간격 추가 */
+}
+
+.prev-question {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: var(--bg-subtle);
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px var(--shadow-color);
+    max-width: 300px;
+    z-index: 1;
+}
+
+.answer-box {
+    background-color: var(--bg-widget);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1; /* 높이를 유연하게 조절 */
+    box-shadow: inset 0 1px 4px var(--shadow-color); /* 안쪽 그림자 효과 */
+    color: var(--text-subtle);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.answer-box p { /* 실제 답변이 들어갈 경우를 대비 */
+    color: var(--text-main);
+}
+
+
+.input-area {
+    margin-top: auto;
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    border-radius: 12px; /* 전체 영역을 둥글게 */
+    overflow: hidden; /* 자식 요소가 삐져나오지 않도록 */
+}
+
+.input-area input {
+    flex: 1;
+    padding: 14px 16px;
+    border: 1px solid var(--border-color);
+    border-right: none;
+    background-color: var(--bg-widget);
+    color: var(--text-main);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.input-area input:focus {
+    outline: none;
+    border-color: var(--primary-accent);
+}
+
+.input-area button {
+    padding: 12px 24px;
+    background-color: var(--primary-accent);
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.input-area button:hover {
+    background-color: var(--primary-accent-dark);
 }

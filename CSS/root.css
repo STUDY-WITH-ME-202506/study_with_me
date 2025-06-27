@@ -1,3 +1,4 @@
+/*
 
 :root {
     --main-bg: #ffffff;
@@ -9,7 +10,7 @@
     --question-bg: #aab7b8;
     --answer-bg: #f4f6f6;
     --input-bg: #ffffff;
-    --todo-bg: #E6ECF0; /* 변경된 투두리스트 배경 색상 */
+    --todo-bg: #E6ECF0; !* 변경된 투두리스트 배경 색상 *!
     --button-bg: #000080;
     --button-color: #ffffff;
     --border-color: #aab7b8;
@@ -39,13 +40,13 @@ header {
 .logo {
     display: flex;
     align-items: center;
-    justify-content: center; /* 필요시 오른쪽으로는 right 적용 */
+    justify-content: center; !* 필요시 오른쪽으로는 right 적용 *!
     padding: 0 1rem;
-    height: 60px; /* header 높이에 맞게 조정 */
+    height: 60px; !* header 높이에 맞게 조정 *!
 }
 
 .logo img {
-    height: 140px; /* 여기서 크기 조절! */
+    height: 140px; !* 여기서 크기 조절! *!
     object-fit: contain;
 }
 
@@ -53,4 +54,170 @@ button {
     cursor: pointer;
     border: none;
     background: none; 
+}*/
+
+
+
+/* --- 새로운 색상 팔레트 및 글로벌 변수 --- */
+:root {
+    --bg-main: #fdf6e3; /* 더 따뜻하고 눈에 띄는 상아색 배경 */
+    --bg-header: #ffffff;
+    --bg-subtle: #faeeda; /* 은은한 아이보리 (필터 배경 등) */
+    --bg-widget: #fcfaf5; /* 부드러운 크림색 (콘텐츠 박스 배경) */
+
+    --primary-accent: #f5a623;
+    --primary-accent-dark: #e89815;
+    --secondary-accent: #7d5a3d;
+
+    --text-main: #4a3f35;
+    --text-subtle: #8a7d70;
+
+    --border-color: #e0dace;
+    --shadow-color: rgba(90, 76, 64, 0.1);
+
+    --usercard-bg:#fdf6e3;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+            linear-gradient(transparent, transparent),
+            repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.01) 0, rgba(0, 0, 0, 0.01) 1px, transparent 1px, transparent 2px);
+    z-index: -1; /* 다른 컨텐츠를 가리지 않도록 z-index 수정 */
+}
+
+body {
+    margin: 0;
+    font-family: 'Nunito', 'Segoe UI', sans-serif; /* 새로운 폰트 적용 */
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header {
+    background-color: var(--bg-header);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border-color); /* 테두리를 얇게 */
+    position: relative;
+    box-shadow: 0 2px 8px var(--shadow-color); /* 부드러운 그림자 추가 */
+    z-index: 10;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: 'Nunito', 'Segoe UI', sans-serif; /* 버튼에도 폰트 적용 */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.logo img {
+    height: 140px;
+    object-fit: contain;
+}
+
+/* --- 모달 공통 스타일 (기존 스타일 유지, 색상만 변수 적용) --- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    padding: 30px 40px;
+    border-radius: 16px; /* 더 둥글게 */
+    text-align: left;
+    max-width: 500px;
+    width: 80%;
+    line-height: 1.8;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+}
+
+.modal-content h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--secondary-accent);
+    margin-bottom: 20px;
+}
+
+.modal-content .quote-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+
+.modal-content .quote-profile {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--text-subtle);
+    margin-bottom: 16px;
+}
+
+.modal-content .quote-text {
+    font-size: 1.1rem;
+    color: var(--text-main);
+    background-color: #ffffff;
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-accent);
+    line-height: 1.6;
+    white-space: normal;
+}
+
+.modal-content button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: var(--bg-subtle);
+    color: var(--text-main);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+.modal-content button:hover {
+    background-color: var(--primary-accent);
+    color: white;
+    border-color: var(--primary-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+/* 휴식 모달 전용 */
+#break-modal {
+    display: none;
+}
+#break-modal .modal-content button {
+    background-color: var(--primary-accent);
+    color: white;
+}
+#break-modal .modal-content button:hover{
+    background-color: var(--primary-accent-dark);
 }

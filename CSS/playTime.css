@@ -1,6 +1,32 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css");
 
+
+#modal-btn {
+    margin-top: 15px; /* 필터 영역과의 간격 */
+    padding: 10px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-widget);
+    cursor: pointer; /* 클릭 가능하다는 표시 */
+    transition: background-color 0.2s;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+#modal-btn:hover {
+    background-color: var(--bg-subtle);
+}
+
+#modal-btn img {
+    width: 45px;
+    height: 45px;
+}
+
+
 #card-overlay {
+
     width: 100vw;
     height: 100vh;
     background: black;
