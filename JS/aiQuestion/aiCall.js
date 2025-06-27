@@ -98,7 +98,19 @@ ${inputQuestion}
 
 //========변수 값 리턴==========//
 export function aiGet() {
-  aiCall(); //ai 호출 함수
+  // 확인 버튼 누르면 aiGet() 호출하기
+  document.getElementById('pushAi').addEventListener('click',e=>{
+    console.log('button');
+    aiCall(); //ai 호출 함수
+  })
+
+  // 입력창에서 enter 누르면 aiGet() 호출하기
+  document.getElementById('problemText').addEventListener("keydown", e=>{
+    if (event.key === "Enter") {
+      console.log('enter');
+      aiCall(); //ai 호출 함수
+    }
+  })
 }
 
 // 질문 카운트 만들기
