@@ -4,7 +4,7 @@ import {stringSplit} from './cleanString.js';
 
 //======== 변수 정의 ========//
 // 제미나이 key와 주소
-const API_KEY = '';
+const API_KEY = 'AIzaSyAnx5WFFsMBgfx8dmdEruWmT5888F5TJCI';
 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 // 프롬프트관련 변수
 const textInput = document.getElementById('problemText');//질문 입력창 주소
