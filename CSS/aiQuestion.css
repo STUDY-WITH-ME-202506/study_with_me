@@ -115,6 +115,7 @@
     color: var(--text-subtle);
     font-size: 1.1rem;
     line-height: 1.6;
+    white-space: pre-wrap;
 }
 
 .answer-box p { /* 실제 답변이 들어갈 경우를 대비 */
