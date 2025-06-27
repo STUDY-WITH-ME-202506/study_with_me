@@ -1,75 +1,3 @@
-/*
-.container {
-    flex: 1;
-    display: flex;
-    position: relative;
-    overflow: hidden;
-}
-
-.ai-section {
-    flex: 1;
-    padding: 20px;
-    background-color: var(--ai-bg);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    transition: margin-right 0.3s ease;
-    box-sizing: border-box;
-}
-
-!* 투두리스트가 열렸을 때 AI 영역을 줄임 *!
-.todo-list.show ~ .ai-section {
-    margin-right: 50vw;
-}
-
-.prev-question {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: var(--question-bg);
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-weight: bold;
-    max-width: 300px;
-    z-index: 1;
-}
-
-.answer-box {
-    background-color: var(--answer-bg);
-    border-radius: 6px;
-    padding: 16px;
-    overflow-y: auto;
-    height: 300px;
-    margin-top: 80px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    white-space: pre-wrap;
-}
-
-.input-area {
-    margin-top: auto;
-    display: flex;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.input-area input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid var(--border-color);
-    border-radius: 6px 0 0 6px;
-    background-color: var(--input-bg);
-}
-
-.input-area button {
-    padding: 8px 16px;
-    background-color: var(--button-bg);
-    border: none;
-    border-radius: 0 6px 6px 0;
-    color: var(--button-color);
-    cursor: pointer;
-}
-*/
 
 .container {
     flex: 1;
@@ -130,22 +58,27 @@
     box-shadow: 0 2px 8px var(--shadow-color);
     border-radius: 12px; /* 전체 영역을 둥글게 */
     overflow: hidden; /* 자식 요소가 삐져나오지 않도록 */
+    border: 1px solid var(--border-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+.input-area:focus-within {
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.3); /* 포커스를 더 잘보이게 하는 효과 */
+}
+
 
 .input-area input {
     flex: 1;
     padding: 14px 16px;
-    border: 1px solid var(--border-color);
-    border-right: none;
     background-color: var(--bg-widget);
     color: var(--text-main);
     font-size: 1rem;
-    transition: border-color 0.3s ease;
+    border: none;
 }
 
 .input-area input:focus {
     outline: none;
-    border-color: var(--primary-accent);
 }
 
 .input-area button {
