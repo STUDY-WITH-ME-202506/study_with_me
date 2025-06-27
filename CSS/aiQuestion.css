@@ -37,7 +37,7 @@
     background-color: var(--bg-widget);
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 20px;
+    padding: 20px 20px 0 20px;
     overflow-y: auto;
     flex-grow: 1; /* 높이를 유연하게 조절 */
     box-shadow: inset 0 1px 4px var(--shadow-color); /* 안쪽 그림자 효과 */
@@ -50,8 +50,38 @@
 .answer-box p { /* 실제 답변이 들어갈 경우를 대비 */
     color: var(--text-main);
 }
-
-
+.solving-box {
+    background-color: var(--bg-widget);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1; /* 높이를 유연하게 조절 */
+    box-shadow: inset 0 1px 4px var(--shadow-color); /* 안쪽 그림자 효과 */
+    color: var(--text-subtle);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    z-index: -1;
+    position: relative;
+    top: -30px;
+}
+.solving-box.show{
+    padding-top: 80px;
+    position: relative;
+    top: -60px;
+}
+.sol-btn{
+    position: relative;
+    z-index: 2;
+    top: -40px;
+    left: 1200px;
+    background: #ff8d07;
+    border-radius: 5px;
+}
+.sol-btn.show{
+    z-inex: 3;
+}
 .input-area {
     margin-top: auto;
     display: flex;
