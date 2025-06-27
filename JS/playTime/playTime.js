@@ -8,8 +8,9 @@ export function playTime() {
     const $closeCard = document.getElementById('close-card-btn');
     const $fillGauge = document.getElementById('fill-gauge');
     const $gaugeMessage = document.querySelector('.gauge-message.bottom');
-    const [$question,$planner,$studyTime] = [...document.querySelectorAll('.achieve-stat')];
-    const $ac = [...document.querySelectorAll('.grade')];
+    const [$question, $planner, $studyTime] = [...document.querySelectorAll('.achieve-stat')];
+    const [$questionAc, $plannerAc, $studyTimeAc] = [...document.querySelectorAll('.grade')];
+    const [$circle1, $circle2, $circle3] = [...document.querySelectorAll('.achieve-circle')];
 
 
     // 유저의 목표시간 추후에 데이터 받아서 수정가능
@@ -58,43 +59,65 @@ export function playTime() {
     }
 
     // 업적상황에 따라 GRADE 반영 하는 함수
-    function gradeMaker(time, ac) {
-      ac.forEach(ac =>
-        {
-            if (time.hours >= 0 && time.hours < 20) {
-                ac.textContent = "C";
-            } else if (time.hours >= 20 && time.hours < 40) {
-                ac.textContent = "B";
-            } else if (time.hours >= 40 && time.hours < 60) {
-                ac.textContent = "A";
-            } else if (time.hours >= 60) {
-                ac.textContent = "S";
-            }
-        });
+    function gradeMaker(value, ac) {
+        if (value >= 0 && value < 20) {
+            ac.textContent = "C";
+        } else if (value >= 20 && value < 40) {
+            ac.textContent = "B";
+        } else if (value >= 40 && value < 60) {
+            ac.textContent = "A";
+        } else if (value >= 60) {
+            ac.textContent = "S";
+        }
     }
 
     // 업적 현황을 업적텍스트에 반영하는 함수
-    function gradeStat(kindOfAchieve, achieve) {
-
+    function gradeStat(kindOfAchieve, achieve, circle) {
+        let circleDegree = 0;
+        if (!kindOfAchieve) kindOfAchieve = 0;
         if (kindOfAchieve >= 0 && kindOfAchieve < 20) {
             achieve.textContent = `${kindOfAchieve}/20`;
+            circleDegree = (kindOfAchieve / 20) * 360;
         } else if (kindOfAchieve >= 20 && kindOfAchieve < 40) {
             achieve.textContent = `${kindOfAchieve - 20}/20`;
+            circleDegree = ((kindOfAchieve - 20) / 20) * 360
         } else if (kindOfAchieve >= 40 && kindOfAchieve < 60) {
             achieve.textContent = `${kindOfAchieve - 40}/20`;
+            circleDegree = ((kindOfAchieve - 40) / 20) * 360
         } else if (kindOfAchieve >= 60) {
             achieve.textContent = `${kindOfAchieve}`;
+            circleDegree = 360;
         }
-    }
+        let intervalLimit = 0;
+        let hslHandle;
+        let hue=160;
+        const intervalHandle = setInterval(() => {
+            if (intervalLimit <= circleDegree) {// hue 조절부 240부터 시작
+                hslHandle = hslHandle < 2 ? 1 : hue - (intervalLimit / 2);
+
+                circle.style.background = `conic-gradient(
+  hsl(${hslHandle}, 100%, 62%) 0deg ${intervalLimit}deg,
+  transparent ${intervalLimit}deg 360deg
+)`
+                intervalLimit += 5;
+            } else {
+                clearInterval(intervalLimit);
+            }
+        }, 10)
+
+    }// 함수 끝부분
 
 
 // 모달 오픈시 가동 openModal 함수 안에서 작동함
     function isModalOpen() {
         totalTime = JSON.parse(localStorage.getItem('totalTime'));
+        let completedCount = JSON.parse(localStorage.getItem('completedDeleteCount'));
         // 총 시간을 분으로 환산
-        totalTime.hours = 2; // 테스트위해 2시간 추가해둠
+        totalTime.hours = 10; // 테스트위해 2시간 추가해둠
         const newTime = (totalTime.hours * 60) + totalTime.minutes;
-        const percentOfTime = Math.floor((newTime / goalTime) * 100)
+        let percentOfTime = (newTime / goalTime) * 100;
+
+        percentOfTime = percentOfTime > 100 ? percentOfTime = 100 : Math.floor(percentOfTime);
 
         // 오늘 공부게이지 퍼센트 텍스트 반영
         textOfPercent(percentOfTime, 10);
@@ -107,8 +130,16 @@ export function playTime() {
             $gaugeMessage.textContent = `${totalTime.minutes}분 공부했어요!`;
         }
 
-        gradeMaker(totalTime, $ac);
-        gradeStat(totalTime.hours, $studyTime);
+        // 업적 데이터 반영
+
+        //circle3
+        gradeMaker(totalTime.hours, $studyTimeAc);
+        gradeStat(totalTime.hours, $studyTime, $circle3);
+        //circle2
+        gradeMaker(completedCount, $plannerAc);
+        gradeStat(completedCount, $planner, $circle2);
+
+
         // gradeStat(질문횟수, $question);
         // gradeStat(완료계획횟수, $planner);
 
@@ -119,8 +150,8 @@ export function playTime() {
 
 
     }
+
     openModal();
     closeModal();
-
 
 }
