@@ -35,8 +35,7 @@ async function aiQuestion(inputQuestion) {
   if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
 
   // 이곳에서 응답 본문을 JSON 객체로 파싱
-  const result = await res.json();
-  return result; // 이건 JSON 객체
+  return await res.json();
 }
 
 /**
@@ -52,7 +51,10 @@ async function aiCall() {
   const res = await aiQuestion(inputQuestion);// 질분답변을 JSON 객체로 파싱해서 받음
   const problemJsonString = res.candidates[0].content.parts[0].text;// text 부분 추출
 
-  talkRendering('ai', stringSplit(problemJsonString));// 답변 렌더링하기
+  const {problemExplain, problemSolving} =stringSplit(problemJsonString)
+  console.log('problem', problemExplain);
+  talkRendering('aiEx', problemExplain);// 답변 렌더링하기
+  talkRendering('aiSol',problemSolving)
 }
 
 
@@ -106,7 +108,7 @@ export function aiGet() {
 
   // 입력창에서 enter 누르면 aiGet() 호출하기
   document.getElementById('problemText').addEventListener("keydown", e=>{
-    if (event.key === "Enter") {
+    if (e.key === "Enter") {
       console.log('enter');
       aiCall(); //ai 호출 함수
     }

@@ -6,21 +6,29 @@
  * @return {string} 리턴할 문자열
  */
 export function stringSplit(jsonString) {
-  // 백틱 제거
-  jsonString = backtickRemove(jsonString)
+  // 1. 백틱 제거
+  jsonString = backtickRemove(jsonString);
 
-  // 문자열 → 객체
+  // 2. 문자열 → 객체
   const obj = JSON.parse(jsonString);
 
-  // $ 제거
+  // 3. $ 기호 제거
   notDollar(obj);
 
-  // key: value 형식으로 문자열 만들기
-  const resultText = keyValue(obj);
+  // 4. 두 덩어리로 나누기 (⚠️ 배열 구조 분해)
+  const [part1, part2] = splitData(obj);
 
-  console.log('str', resultText);
-  return resultText;
+  // 5. 문자열로 변환
+  const problemExplain = keyValue(part1);
+  const problemSolving = keyValue(part2);
+
+  // 6. 하나로 합쳐서 반환
+  const resultText = problemExplain; //+ text2;
+
+  console.log('🧾 전체 문자열 결과:', resultText);
+  return {problemExplain, problemSolving};
 }
+
 
 //========백틱 제거======//
 /**
@@ -76,6 +84,23 @@ function notDollar(data) {
   // const cleanedJsonString = JSON.stringify(processedObj, null, 2);
 }
 
+function splitData(data) {
+  const part1Keys = ['problemType', 'problemLevel', 'problem', 'problemOneLine'];
+  const part2Keys = ['solvingOrder', 'answer', 'tip'];
+
+  const part1 = {};
+  const part2 = {};
+
+  Object.entries(data).forEach(([key, value]) => {
+    if (part1Keys.includes(key)) part1[key] = value;
+    else if (part2Keys.includes(key)) part2[key] = value;
+  });
+
+  return [part1, part2];
+}
+
+
+
 //=======key : value======///
 /**
  * 문자열을 Key : value 형식으로 바꾸고 줄바꿈하는 함수
@@ -83,27 +108,35 @@ function notDollar(data) {
  * @return {string} 리턴 문자열
  */
 function keyValue(data){
-  let result =  '';//반환할 문자열
+  let result = '';
+  const labelMap = {
+    problemType: '문제 유형',
+    problemLevel: '문제 레벨',
+    problem: '문제',
+    problemOneLine: '문제 한줄 설명',
+    answer: '문제의 답',
+    tip: '비슷한 유형에서의 풀이법'
+  };
 
-  // ":"를 기준으로 알아서 key와 value로 나눠줌
   Object.entries(data).forEach(([key, value]) => {
-    // prompt와 같은 형식으로 작성해 주세요.
-    const label = {
-      problemType: '문제 유형',
-      problemLevel: '문제 레벨',
-      problem: '문제',
-      problemOneLine: '문제 한줄 설명',
-      solvingOrder: ['문제 풀이'],
-      answer: '문제의 답',
-      tip: '비슷한 유형에서의 풀이법'
-    }[key] || key;
+    const label = labelMap[key] || key;
 
-    // value가 배열일 경우 예쁘게 줄바꿈 처리
     if (Array.isArray(value)) {
-      result += `${label}:\n${value.map(v => ` - ${v}`).join('\n\n')}\n\n`;
+      result += arrayPlace(key, value); // 배열일 경우 따로 처리
     } else {
       result += `${label}: ${value}\n\n`;
     }
   });
-  return result; //문자열로 반환
+
+  return result;
 }
+
+function arrayPlace(key, array) {
+  const labelMap = {
+    solvingOrder: '문제 풀이'
+  };
+
+  const label = labelMap[key] || key;
+  return `${label}:\n${array.map(v => ` - ${v}`).join('\n\n')}\n\n`;
+}
+
