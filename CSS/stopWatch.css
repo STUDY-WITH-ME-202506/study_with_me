@@ -1,3 +1,4 @@
+/*
 .stopwatch, .quote-board, .logo {
     padding: 8px 12px;
     border-radius: 8px;
@@ -19,9 +20,9 @@
 .stopwatch {
     font-weight: bold;
     font-size: 2rem;
-    display: flex; /* 플렉스 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
-    gap: 5px; /* 이미지와 텍스트 사이 여백 */
+    display: flex; !* 플렉스 정렬 *!
+    align-items: center; !* 수직 가운데 정렬 *!
+    gap: 5px; !* 이미지와 텍스트 사이 여백 *!
 }
 
 .stopwatch-buttons {
@@ -36,18 +37,18 @@
     border-radius: 6px;
     width: 70px;
     text-align: center;
-    border: 1px solid var(--border-color);   /* ✅ 보더 추가 */
-    background-color: var(--usercard-bg);       /* ✅ 배경색 지정 */
-    color: var(--logo-color);               /* ✅ 글자색 지정 */
+    border: 1px solid var(--border-color);   !* ✅ 보더 추가 *!
+    background-color: var(--usercard-bg);       !* ✅ 배경색 지정 *!
+    color: var(--logo-color);               !* ✅ 글자색 지정 *!
     transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 .stopwatch-buttons button:disabled {
-    background-color: #e0e0e0;    /* 연회색 배경 */
-    color: #999999;               /* 흐릿한 텍스트 색 */
-    border: 1px solid #cccccc;    /* 연한 테두리 */
+    background-color: #e0e0e0;    !* 연회색 배경 *!
+    color: #999999;               !* 흐릿한 텍스트 색 *!
+    border: 1px solid #cccccc;    !* 연한 테두리 *!
     cursor: not-allowed;
-    box-shadow: none;             /* 그림자 제거 */
-    opacity: 0.7;                 /* 살짝 흐릿하게 */
+    box-shadow: none;             !* 그림자 제거 *!
+    opacity: 0.7;                 !* 살짝 흐릿하게 *!
 }
 
 .stopwatch-buttons button:not(:disabled):hover {
@@ -67,7 +68,7 @@
     width: 40px;
     display: block;
 }
-/* 오늘의 명언 버튼 */
+!* 오늘의 명언 버튼 *!
 .quote-btn {
     padding: 8px 12px;
     border: none;
@@ -77,18 +78,18 @@
     font-weight: bold;
     font-size: 2rem;
     height: 50px;
-    display: flex; /* 플렉스 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
-    gap: 5px; /* 이미지와 텍스트 사이 여백 */
+    display: flex; !* 플렉스 정렬 *!
+    align-items: center; !* 수직 가운데 정렬 *!
+    gap: 5px; !* 이미지와 텍스트 사이 여백 *!
     transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 .quote-btn:hover {
-    background-color: #ffe082; /* hover 시 더 진하게 */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* hover 효과 */
+    background-color: #ffe082; !* hover 시 더 진하게 *!
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); !* hover 효과 *!
 }
 
 
-/* 모달 오버레이 */
+!* 모달 오버레이 *!
 .modal-overlay {
     display: none;
     position: fixed;
@@ -102,7 +103,7 @@
     align-items: center;
 }
 
-/* 모달 내용 */
+!* 모달 내용 *!
 .modal-content {
     background-color: var(--answer-bg);
     color: var(--logo-color);
@@ -158,19 +159,19 @@
     transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 .modal-content button:hover {
-    background-color: #000080; /* hover 시 더 진하게 */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* hover 효과 */
+    background-color: #000080; !* hover 시 더 진하게 *!
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); !* hover 효과 *!
     color: white;
 }
-/* 휴식 모달 전용 */
+!* 휴식 모달 전용 *!
 #break-modal {
     display: none;
 }
 
 
-/* 휴식 모달 콘텐츠 */
+!* 휴식 모달 콘텐츠 *!
 #break-modal .modal-content {
-    background-color: var(--todo-bg); /* 휴식용 밝은 배경 */
+    background-color: var(--todo-bg); !* 휴식용 밝은 배경 *!
     color: var(--logo-color);
     padding: 30px 40px;
     border-radius: 12px;
@@ -182,18 +183,18 @@
     border: 1px solid var(--border-color);
 }
 
-/* 제목 */
+!* 제목 *!
 #break-modal .modal-content h2 {
     font-size: 2.5rem;
     font-weight: bold;
     color: var(--button-bg);
     margin-bottom: 20px;
-    display: flex; /* 플렉스 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
-    gap: 5px; /* 이미지와 텍스트 사이 여백 */
+    display: flex; !* 플렉스 정렬 *!
+    align-items: center; !* 수직 가운데 정렬 *!
+    gap: 5px; !* 이미지와 텍스트 사이 여백 *!
 }
 
-/* 메시지 본문 */
+!* 메시지 본문 *!
 #break-modal .modal-content .quote-text {
     font-size: 1.5rem;
     background-color: #fff;
@@ -205,7 +206,7 @@
     line-height: 1.6;
 }
 
-/* 닫기 버튼 */
+!* 닫기 버튼 *!
 #break-modal .modal-content button {
     margin-top: 20px;
     padding: 8px 16px;
@@ -219,8 +220,115 @@
 }
 #break-modal .modal-content button:hover{
 
-    background-color: #000080; /* hover 시 더 진하게 */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* hover 효과 */
+    background-color: #000080; !* hover 시 더 진하게 *!
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); !* hover 효과 *!
     color: white;
 
+}
+*/
+
+.stopwatch-img, .quote-img {
+    width: 28px; /* 아이콘 크기 살짝 조정 */
+    display: block;
+}
+
+.stopwatch-group, .quote-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    border-radius: 12px; /* 더 둥글게 */
+    background-color: var(--bg-widget);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px var(--shadow-color);
+    height: 50px;
+    transition: all 0.3s ease;
+}
+
+.quote-btn {
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    border-radius: 12px;
+    background-color: var(--bg-widget);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px var(--shadow-color);
+    height: 50px;
+    transition: all 0.3s ease;
+
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-main);
+}
+
+.quote-btn:hover, .stopwatch-group:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+.stopwatch, .quote-btn {
+    font-weight: 700; /* bold에서 700으로 */
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-main);
+}
+
+.quote-img {
+    width: 28px;
+    display: block;
+    transition: filter 0.3s ease; /* 아이콘 색상 변경을 위한 트랜지션 */
+}
+
+.quote-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px var(--shadow-color);
+    background-color: var(--primary-accent); /* 배경색 변경 추가 */
+    color: white; /* 텍스트 색상 변경 추가 */
+    border-color: var(--primary-accent);
+}
+
+.quote-btn:hover .quote-img {
+    filter: brightness(0) invert(1);
+}
+
+.stopwatch-display {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-subtle);
+}
+
+.stopwatch-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.stopwatch-buttons button {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 70px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-subtle);
+    color: var(--text-main);
+    transition: all 0.3s ease;
+}
+
+.stopwatch-buttons button:not(:disabled):hover {
+    background-color: var(--primary-accent);
+    color: white;
+    border-color: var(--primary-accent);
+    transform: scale(1.05);
+}
+
+.stopwatch-buttons button:disabled {
+    background-color: #f0f0f0;
+    color: #b0b0b0;
+    border-color: #e0e0e0;
+    cursor: not-allowed;
+    opacity: 0.7;
 }
