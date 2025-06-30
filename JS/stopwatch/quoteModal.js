@@ -12,9 +12,9 @@ export function quoteModal () {
 // 모달 열기 버튼
     openBtn.addEventListener('click', () => {
 
-        loadQuote() // API 연결 함수
-
         modal.style.display = 'flex';
+
+        loadQuote() // API 연결 함수
     });
 // 모달 닫기 버튼
     closeBtn.addEventListener('click', () => {
@@ -25,6 +25,13 @@ export function quoteModal () {
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
             modal.style.display = 'none';
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        // 모달이 열려있고(flex), 눌린 키가 'Escape'일 경우
+        if (modal.style.display === 'flex' && e.key === 'Escape') {
+            modal.style.display = 'none'; // 모달을 닫습니다.
         }
     });
 }
