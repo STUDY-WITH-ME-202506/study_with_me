@@ -92,11 +92,8 @@ export function playTime() {
         }
         let intervalLimit = 0;
         let hslHandle;
-<<<<<<< HEAD
-        let hue=170;
-=======
+
         let hue = 170;
->>>>>>> 0ca0fe372b4ebb4aca5898bdaa73107ab1b6717a
         const intervalHandle = setInterval(() => {
             if (intervalLimit <= circleDegree) {// hue 조절부 240부터 시작
                 hslHandle = hslHandle < 2 ? 1 : hue - (intervalLimit / 2);
@@ -121,11 +118,7 @@ export function playTime() {
         let completedCount = JSON.parse(localStorage.getItem('completedDeleteCount'));
         let questionCount = JSON.parse(localStorage.getItem('questionCount'));
 
-<<<<<<< HEAD
-        console.log(questionCount);
-        // 총 시간을 분으로 환산
-=======
->>>>>>> 0ca0fe372b4ebb4aca5898bdaa73107ab1b6717a
+
         totalTime.hours = 2; // 테스트위해 2시간 추가해둠
         // 총 시간을 분으로 환산
         const newTime = (totalTime.hours * 60) + totalTime.minutes;
@@ -157,11 +150,10 @@ export function playTime() {
         //circle3
         gradeMaker(totalTime.hours, $studyTimeAc);
         gradeStat(totalTime.hours, $studyTime, $circle3);
-<<<<<<< HEAD
-=======
+
 
         flipCard();
->>>>>>> 0ca0fe372b4ebb4aca5898bdaa73107ab1b6717a
+
 
         //단계설정
         //  0개  20개 40개 60개이상
