@@ -99,7 +99,7 @@
                 <div class="answer-box">
                     문제 영역이 이곳에 표시됩니다. (왼쪽 배치)
                 </div>
-                <button class="sol-btn">답변 보기</button>
+                <details class="sol-btn">답변 보기</details>
                 <div class="solving-box">답변 영역</div>
 
             </div>
@@ -179,9 +179,3 @@
 
 </body>
 </html>
-
-
-$todoToggleBtn.addEventListener('click', e => {
-const isOpen = $todoList.classList.toggle('show');
-$todoToggleBtn.style.right = isOpen ? '400px' : '0';
-})
