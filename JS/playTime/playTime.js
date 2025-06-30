@@ -1,4 +1,4 @@
-import {flipCard} from "./flipCard.js";
+
 
 export function playTime() {
 
@@ -13,7 +13,8 @@ export function playTime() {
     const [$question, $planner, $studyTime] = [...document.querySelectorAll('.achieve-stat')];
     const [$questionAc, $plannerAc, $studyTimeAc] = [...document.querySelectorAll('.grade')];
     const [$circle1, $circle2, $circle3] = [...document.querySelectorAll('.achieve-circle')];
-
+    const backsideTexts= [...document.querySelectorAll('.backside-text.txt3')];
+    const cards =[... document.querySelectorAll('.achieve-card')];
 
     // 유저의 목표시간 추후에 데이터 받아서 수정가능
     const goalTime = 180;
@@ -41,7 +42,11 @@ export function playTime() {
             $userCard.classList.add('hide');
             $cardOverlay.classList.add('hide');
             $fillGauge.style.width = `0%`
+        cards.forEach(card => {
+            card.classList.remove('active');
+        });
         })
+
     }
 
     //퍼센트글씨가 바뀌는 애니메이션
@@ -110,6 +115,27 @@ export function playTime() {
 
     }// 함수 끝부분
 
+    // 카드 뒷면의 업적 정보에 데이터 반영하는 함수
+    function backsideTotalValue(kindOfValue,cardIndex) {
+        backsideTexts[cardIndex].querySelector('span').textContent = `${kindOfValue}`;
+    }
+
+    // 카드 뒤집는 이벤트를 추가해주는 함수
+    function flipCard(dataValue) {
+
+        const cards =[... document.querySelectorAll('.achieve-card')];
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('active');
+            });
+        });
+    }
+
+
+
+
+
+
 
 
 // 모달 오픈시 가동 openModal 함수 안에서 작동함
@@ -151,18 +177,16 @@ export function playTime() {
         gradeMaker(totalTime.hours, $studyTimeAc);
         gradeStat(totalTime.hours, $studyTime, $circle3);
 
+        backsideTotalValue(questionCount,0);
+        backsideTotalValue(completedCount,1);
+        backsideTotalValue(totalTime.hours,2);
 
-        flipCard();
 
-
-        //단계설정
-        //  0개  20개 40개 60개이상
-        //  C     B     A     S
-        //    0/20  n/20  n/40  n/60
 
 
     }
 
+    flipCard();
     openModal();
     closeModal();
 }

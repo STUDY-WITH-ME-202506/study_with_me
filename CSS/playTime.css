@@ -144,7 +144,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     margin-bottom: 5%;
-    overflow: hidden;
+    /*overflow: hidden;*/
 
 }
 
@@ -164,9 +164,13 @@
     min-width: 10px;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 0.6s ease-out;
+    transition: transform 0.4s ease-out;
     cursor: pointer;
     transform: translateZ(0);
+    user-select:none;
+}
+.achieve-card:hover {
+    transform: scale(102%) rotate(-1deg);
 }
 
 .front,
@@ -208,6 +212,13 @@
     color:var(--usercard-bg);
 }
 
+
+
+
+
+
+
+
 .achieve-card.active {
     transform: perspective(1000px) rotateY(180deg);
 }
@@ -225,7 +236,8 @@
     object-fit: contain;
     object-position: center;
     transform: rotate(-3deg);
-
+    pointer-events: none;
+    user-select:none;
 
 }
 
@@ -268,18 +280,19 @@
     font-weight: 800;
     font-size: 2.5rem;
     margin-bottom: 0;
-    cursor: default;
     color: #816139;
+    user-select:none;
 }
 
 .achieve-text {
     width: 100%;
     text-align: center;
     /*border: 3px solid red;*/
-    font-size: 1.5rem;
-    font-weight: 700;
-    cursor: default;
+    color:  #4a3f35;
+    font-size: 1.6rem;
+    font-weight: 800;
     margin-bottom: 7%;
+    user-select:none;
 }
 
 
@@ -321,6 +334,8 @@
     text-align: center;
     margin-bottom: 10px;
     /*border: 3px solid red;*/
+    user-select:none;
+    font-size: 2rem;
 }
 
 .back .backside-text.txt2 {
@@ -329,6 +344,7 @@
     font-size: 1.6rem;
     padding: 0 3%;
     /*border: 1px solid blue;*/
+    user-select:none;
 }
 
 .back .backside-text.txt3 {
@@ -336,8 +352,12 @@
     font-size: 1.5rem;
     line-height: 2rem;
     /*border: 1px solid red;*/
+    user-select:none;
 }
-
+.back .backside-text.txt3 span{
+    font-size: 1.8rem;
+    user-select:none;
+}
 
 
 
