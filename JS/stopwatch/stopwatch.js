@@ -120,18 +120,28 @@ function showBreakModal(){
         $breakModal.style.display = 'flex';
     }
 
-    // 쉬는 시간 모달 닫기
-$closeBreakModalBtn.addEventListener('click',e => {
-    $breakModal.style.display = 'none';
+    // 쉬는 시간 모달 닫기 및 타이머 재설정 함수
+    function closeBreakModal() {
+        $breakModal.style.display = 'none';
 
-    // 쉬는 시간 종료 후 새 타이머 설정
-    const isTestMode = true;
-    const breakTime = isTestMode ? 5000 : 3000000;
+        // 쉬는 시간 종료 후 새 타이머를 설정하는 로직
+        const isTestMode = true;
+        const breakTime = isTestMode ? 5000 : 3000000;
 
-    hasShownBreak = false;
-    breakTargetTime = elapsedTime + breakTime;
+        hasShownBreak = false; // 다음 알림을 위한 초기화
+        breakTargetTime = elapsedTime + breakTime; // 다음 목표 시간 재설정
+    }
 
-})
+    //  쉬는 시간 모달 닫기 버튼 이벤트
+    $closeBreakModalBtn.addEventListener('click', closeBreakModal);
+
+    //  ESC 키로 모달 닫기 이벤트
+    document.addEventListener('keydown', (e) => {
+        // 쉬는 시간 모달이 열려 있고, ESC 키를 눌렀을 때
+        if ($breakModal.style.display === 'flex' && e.key === 'Escape') {
+            closeBreakModal();
+        }
+    });
 
 
 
