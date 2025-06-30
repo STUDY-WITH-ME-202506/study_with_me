@@ -10,7 +10,7 @@
     align-items: center;
     background-color: var(--bg-widget);
     cursor: pointer; /* 클릭 가능하다는 표시 */
-    transition: background-color 0.2s;
+    transition: 0.4s;
     border: 1px solid var(--border-color);
     box-shadow: 0 2px 8px var(--shadow-color);
 }
@@ -18,6 +18,7 @@
 #modal-btn:hover {
     background-color: var(--bg-subtle);
 }
+
 #card-overlay {
     width: 100vw;
     height: 100vh;
@@ -98,7 +99,7 @@
 }
 
 #fill-gauge {
-    background: linear-gradient(to right,#efae25, #fbc758,#fcd76e,#fee089);
+    background: linear-gradient(to right, #efae25, #fbc758, #fcd76e, #fee089);
     opacity: 0.9;
     width: 0;
     height: 100%;
@@ -137,13 +138,13 @@
 .achieve-container {
     width: 100%;
     height: 27%;
-    /*border: 2px solid blue;*/
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
     flex-direction: row;
     margin-bottom: 5%;
+    overflow: hidden;
 
 }
 
@@ -159,31 +160,83 @@
     background: #fffdf9;
     border-radius: 10px;
     box-shadow: 4px 4px 8px #00006026;
-    padding: 1% 0;
+    padding: 0;
+    min-width: 10px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-out;
+    cursor: pointer;
+    transform: translateZ(0);
+}
+
+.front,
+.back,
+.side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    backface-visibility: hidden;
+    flex-direction: column;
+}
+
+.front {
+    background: white;
+    transform-style: preserve-3d;
+    border-radius: 10px;
+
+}
+
+.side {
+    width: 4px;
+    left: -2px;
+    background: transparent;
+    transform: rotateY(90deg);
+    transform-origin: left center;
+
+}
+
+.back {
+
+    background: #6C4E31;
+    transform: rotateY(180deg);
+    border-radius: 3px;
+    color:var(--usercard-bg);
+}
+
+.achieve-card.active {
+    transform: perspective(1000px) rotateY(180deg);
 }
 
 .achieve-img {
-    /*border: 3px solid red;*/
-    width: 80%;
+    width: 100%;
     height: 40%;
-    overflow: hidden;
-
+    margin-top: 4%;
 }
+
 
 .achieve-img img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     object-position: center;
-    rotate: -3deg;
+    transform: rotate(-3deg);
+
+
 }
 
 /* 업적 그래프 부분 */
 .achieve-infobox {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    /*border: 3px solid red;*/
 }
 
 .achieve-circle {
@@ -220,6 +273,9 @@
 }
 
 .achieve-text {
+    width: 100%;
+    text-align: center;
+    /*border: 3px solid red;*/
     font-size: 1.5rem;
     font-weight: 700;
     cursor: default;
@@ -260,6 +316,30 @@
     display: block;
     opacity: 0.2;
 }
+
+.back .backside-text {
+    text-align: center;
+    margin-bottom: 10px;
+    /*border: 3px solid red;*/
+}
+
+.back .backside-text.txt2 {
+    text-align: center;
+    line-height: 2rem;
+    font-size: 1.6rem;
+    padding: 0 3%;
+    /*border: 1px solid blue;*/
+}
+
+.back .backside-text.txt3 {
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    /*border: 1px solid red;*/
+}
+
+
+
 
 
 /* 원형 그래프 조절 부분 */
@@ -303,11 +383,11 @@
     rotate: -3deg;
     transition: 0.4s;
 }
+
 #modal-btn:hover img {
-    transform: scale(110%) rotate(-5deg);
+    transform: scale(115%) rotate(-5deg);
 
 }
-
 
 
 /* 툴팁 */
@@ -320,7 +400,7 @@
     position: absolute;
     right: 110%;
     top: 50%;
-    transform: translate(0%,-50%);
+    transform: translate(0%, -50%);
     background-color: var(--primary-accent);
     color: #fff;
     padding: 8% 35%;
@@ -333,9 +413,8 @@
     transition: opacity 0.2s ease;
     z-index: 1000;
 }
-#modal-btn:hover::after { opacity: 1; }
 
-
-
-
+#modal-btn:hover::after {
+    opacity: 1;
+}
 
