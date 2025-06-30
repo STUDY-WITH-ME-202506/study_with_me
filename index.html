@@ -10,22 +10,23 @@
 </head>
 <body>
 
-<header>
-    <div class="stopwatch-group">
-        <div class="stopwatch"><img class="stopwatch-img" src="img/stopwatch.png" alt="스톱워치 이미지"> 스톱워치</div>
-        <div class="stopwatch-display">00:00:00</div>
-        <div class="stopwatch-buttons">
-            <button id="start">시작</button>
-            <button id="pause" disabled>일시정지</button>
-            <button id="reset">초기화</button>
+    <header>
+        <div class="stopwatch-group">
+            <div class="stopwatch"><img class="stopwatch-img" src="img/stopwatch.png" alt="스톱워치 이미지"> 스톱워치</div>
+            <div class="stopwatch-display">00:00:00</div>
+            <div class="stopwatch-buttons">
+                <button id="start">시작</button>
+                <button id="pause" disabled>일시정지</button>
+                <button id="reset">초기화</button>
+            </div>
         </div>
-    </div>
 
         <div class="logo">
             <img src="img/logo.png" alt="Study With Me logo">
         </div>
 
-        <button id="openQuoteModal" class="quote-btn"><img class="quote-img" src="img/quote.png" alt="명언 이미지"> 오늘의 명언</button>
+        <button id="openQuoteModal" class="quote-btn"><img class="quote-img" src="img/quote.png" alt="명언 이미지"> 오늘의 명언
+        </button>
     </header>
     <div id="break-modal" class="modal-overlay">
         <div class="modal-content">
@@ -84,12 +85,11 @@
                 <button id="clear-completed" class="clear-button">완료된 항목 삭제</button>
 
             </div>
-        <div id="modal-btn" data-tooltip="업적"><img src="./img/trophy.png" alt="#"></div>
+            <div id="modal-btn" data-tooltip="업적"><img src="./img/trophy.png" alt="#"></div>
         </div>
     </div>
 
     <button id="todo-toggle-btn"><i class="fas fa-edit"></i></button>
-
 
 
     <div class="container">
@@ -116,7 +116,7 @@
         <div id="close-card-btn"><i class="fas fa-times "></i></div>
         <div class="user-info">
             <div class="user-img"><img src="./img/userImg.png" alt=""></div>
-                <span class="gauge-message">오늘 공부량</span>
+            <span class="gauge-message">오늘 공부량</span>
             <div class="playtime">
                 <div class="time-gauge">
                     <span class="time-per" id="top">40%</span>
@@ -127,62 +127,71 @@
         </div>
 
         <div class="achieve-container">
-            <div class="achieve-card">
 
-                <div class="achieve-img"><img src="./img/trophy.png" alt=""></div>
-                <div class="achieve-value achieve-text">질문왕</div>
-                <div class="backside hide">
-                    <div class="backside-text">질문왕</div>
+            <div class="achieve-card">
+                <div class="front">
+                    <div class="achieve-img"><img src="./img/trophy.png" alt=""></div>
+                    <div class="achieve-value achieve-text">질문 폭격기</div>
+                    <div class="achieve-infobox">
+                        <div class="achieve-circle circle1">
+                            <div class="inner-circle">
+                                <span class="grade ac1">C</span>
+                            </div>
+                        </div>
+                        <div class="achieve-stat achieve-text achieve1">0 / 20</div>
+                    </div>
+                </div>
+
+                <div class="back">
+                    <div class="backside-text">질문 폭격기</div>
                     <div class="backside-text txt2">B: 20개 이상<br>A: 40개 이상<br>S: 60개 이상</div>
                     <div class="backside-text txt3">질문 한 횟수<br>총 @개</div>
                 </div>
-                <div class="achieve-infobox">
-                    <div class="achieve-circle circle1">
-                        <div class="inner-circle">
-                            <span class="grade ac1">C</span>
-                        </div>
-                    </div>
-                    <div class="achieve-stat achieve-text achieve1">11 / 20</div>
-                </div>
+                <div class="side"></div>
             </div>
 
             <div class="achieve-card">
-
-                <div class="achieve-img"><img src="./img/trophy.png" alt=""></div>
-                <div class="achieve-value achieve-text">계획대장군</div>
-                <div class="backside hide">
-                    <div class="backside-text">계획대장군</div>
-                    <div class="backside-text txt2">B: 20개 이상<br>A: 40개 이상<br>S: 60개 이상</div>
-                    <div class="backside-text txt3">완료한 계획<br>총 @개</div>
-                </div>
-                <div class="achieve-infobox">
-                    <div class="achieve-circle circle2">
-                        <div class="inner-circle">
-                            <span class="grade ac2">C</span>
-                        </div>
-                    </div>
-                    <div class="achieve-stat achieve-text achieve2">11 / 20</div>
-                </div>
-            </div>
-
-            <div class="achieve-card">
-                <div class="backside hide">
-                    <div class="backside-text">공부벌레</div>
-                    <div class="backside-text txt2">B: 20시간 이상<br>A: 40시간 이상<br>S: 60시간 이상</div>
-                    <div class="backside-text txt3">같이 공부한 시간<br>총 @시간 </div>
-                </div>
-
+                <div class="front">
                     <div class="achieve-img"><img src="./img/trophy.png" alt=""></div>
-                    <div class="achieve-value achieve-text">공부벌레</div>
-
-                <div class="achieve-infobox">
-                    <div class="achieve-circle circle3">
-                        <div class="inner-circle">
-                            <span class="grade ac3">C</span>
+                    <div class="achieve-value achieve-text">완벽한 하루</div>
+                    <div class="achieve-infobox">
+                        <div class="achieve-circle circle1">
+                            <div class="inner-circle">
+                                <span class="grade ac1">C</span>
+                            </div>
                         </div>
+                        <div class="achieve-stat achieve-text achieve1">11 / 20</div>
                     </div>
-                    <div class="achieve-stat achieve-text achieve3">11 / 20</div>
                 </div>
+
+                <div class="back">
+                    <div class="backside-text">완벽한 하루</div>
+                    <div class="backside-text txt2">B: 20개 이상<br>A: 40개 이상<br>S: 60개 이상</div>
+                    <div class="backside-text txt3">완료 한 횟수<br>총 @개</div>
+                </div>
+                <div class="side"></div>
+            </div>
+
+            <div class="achieve-card">
+                <div class="front">
+                    <div class="achieve-img"><img src="./img/trophy.png" alt=""></div>
+                    <div class="achieve-value achieve-text">몰입의 경지</div>
+                    <div class="achieve-infobox">
+                        <div class="achieve-circle circle1">
+                            <div class="inner-circle">
+                                <span class="grade ac1">C</span>
+                            </div>
+                        </div>
+                        <div class="achieve-stat achieve-text achieve1">0 / 20</div>
+                    </div>
+                </div>
+
+                <div class="back">
+                    <div class="backside-text">몰입의 경지</div>
+                    <div class="backside-text txt2">B: 20시간 이상<br>A: 40시간 이상<br>S: 60시간 이상</div>
+                    <div class="backside-text txt3">공부 한 시간<br>총 @개</div>
+                </div>
+                <div class="side"></div>
             </div>
 
         </div>
@@ -192,9 +201,3 @@
 
 </body>
 </html>
-
-
-$todoToggleBtn.addEventListener('click', e => {
-const isOpen = $todoList.classList.toggle('show');
-$todoToggleBtn.style.right = isOpen ? '400px' : '0';
-})
