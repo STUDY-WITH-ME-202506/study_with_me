@@ -1,5 +1,6 @@
 import {talkRendering,clearText} from './aiRendering.js';
 import {stringSplit} from './cleanString.js';
+import {questionCount} from "./questionCount.js";
 
 
 //======== 변수 정의 ========//
@@ -34,6 +35,8 @@ async function aiQuestion(inputQuestion) {
   // res가 괜찮지 않다면 res의 상태를 내보내기
   if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
 
+  // ai 질문횟수를 로컬스토리지에 저장
+  questionCount();
   // 이곳에서 응답 본문을 JSON 객체로 파싱
   return await res.json();
 }

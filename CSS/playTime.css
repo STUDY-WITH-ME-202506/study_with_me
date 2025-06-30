@@ -18,13 +18,6 @@
 #modal-btn:hover {
     background-color: var(--bg-subtle);
 }
-
-#modal-btn img {
-    width: 45px;
-    height: 45px;
-}
-
-
 #card-overlay {
     width: 100vw;
     height: 100vh;
@@ -219,9 +212,9 @@
 }
 
 .grade {
-    font-weight: 700;
-    font-size: 1.8rem;
-    margin-bottom: 7%;
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin-bottom: 0;
     cursor: default;
     color: #816139;
 }
@@ -307,8 +300,16 @@
 #modal-btn img {
     width: 100%;
     height: 100%;
-    rotate: 5deg;
+    rotate: -3deg;
+    transition: 0.4s;
 }
+#modal-btn:hover img {
+    transform: scale(110%) rotate(-5deg);
+
+}
+
+
+
 /* 툴팁 */
 #modal-btn[data-tooltip] {
     position: relative;
