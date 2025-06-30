@@ -119,7 +119,7 @@ export function playTime() {
         let questionCount = JSON.parse(localStorage.getItem('questionCount'));
 
 
-        totalTime.hours = 2; // 테스트위해 2시간 추가해둠
+        // totalTime.hours = 2; // 테스트위해 2시간 추가해둠
         // 총 시간을 분으로 환산
         const newTime = (totalTime.hours * 60) + totalTime.minutes;
 
