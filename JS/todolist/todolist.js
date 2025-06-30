@@ -117,6 +117,9 @@ export function todolist() {
 
         // 확인 모달을 띄워서 사용자의 확인을 받은 뒤, `onConfirm()`을 실행
         function createConfirmModal(onConfirm) {
+            if (document.getElementById('confirmModal')) {
+                return;
+            }
             const $confirmModal = document.createElement('div');
             $confirmModal.id = 'confirmModal';
             $confirmModal.className = 'modal-overlay-internal';
