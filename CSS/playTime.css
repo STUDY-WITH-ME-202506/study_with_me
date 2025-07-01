@@ -1,0 +1,440 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css");
+
+
+#modal-btn {
+    margin-top: 15px; /* 필터 영역과의 간격 */
+    padding: 10px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-widget);
+    cursor: pointer; /* 클릭 가능하다는 표시 */
+    transition: 0.4s;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+#modal-btn:hover {
+    background-color: var(--bg-subtle);
+}
+
+#card-overlay {
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    position: fixed;
+    z-index: 500;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    pointer-events: auto; /* 추가 */
+}
+
+#user-card {
+    width: 30%;
+    height: 80%;
+    border: 10px solid var(--primary-accent);;
+    border-radius: 5%;
+    background: var(--usercard-bg);
+    display: flex;
+    flex-direction: column;
+    position: fixed; /* absolute에서 fixed로 변경 */
+    z-index: 550;
+    top: 50%; /* 추가 */
+    left: 50%; /* 추가 */
+    transform: translate(-50%, -50%); /* 추가 */
+    margin: 0; /* margin 수정 */
+}
+
+
+.user-info {
+    width: 100%;
+    height: 65%;
+    /*border: 2px solid green;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 3%;
+}
+
+.user-img {
+    /*border: 2px solid green;*/
+    width: 45%;
+    overflow: hidden;
+    margin-bottom: 5%;
+}
+
+.user-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+/* 오늘의 공부게이지 */
+.playtime {
+    width: 50%;
+    height: 25%;
+    /*border: 2px solid green;*/
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2%;
+}
+
+.time-gauge {
+    box-shadow: 2px 2px 7px #00008026;
+    border-radius: 15px;
+    width: 75%;
+    height: 30%;
+    overflow: hidden;
+    background: #aab7b866;
+    margin-bottom: 5%;
+    text-align: center;
+    color: black;
+    position: relative;
+}
+
+#fill-gauge {
+    background: linear-gradient(to right, #efae25, #fbc758, #fcd76e, #fee089);
+    opacity: 0.9;
+    width: 0;
+    height: 100%;
+    transition: 0.4s ease-out;
+}
+
+.time-per {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    font-size: 16px;
+}
+
+
+.time-per#top {
+
+    color: #623909; /* 게이지 위에서 보일 텍스트 색상 */
+
+    z-index: 560;
+}
+
+.gauge-message {
+    font-weight: 700;
+    font-size: 2rem;
+    color: #623909;
+    margin-top: 1%;
+}
+
+
+/* 오늘의 공부게이지 끝*/
+
+
+.achieve-container {
+    width: 100%;
+    height: 27%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-bottom: 5%;
+    /*overflow: hidden;*/
+
+}
+
+/*  업적부분 */
+.achieve-card {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 5px solid #623909CC;
+    background: #fffdf9;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px #00006026;
+    padding: 0;
+    min-width: 10px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease-out;
+    cursor: pointer;
+    transform: translateZ(0);
+    user-select:none;
+}
+.achieve-card:hover {
+    transform: scale(102%) rotate(-1deg);
+}
+
+.front,
+.back,
+.side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    backface-visibility: hidden;
+    flex-direction: column;
+}
+
+.front {
+    background: white;
+    transform-style: preserve-3d;
+    border-radius: 10px;
+
+}
+
+.side {
+    width: 4px;
+    left: -2px;
+    background: transparent;
+    transform: rotateY(90deg);
+    transform-origin: left center;
+
+}
+
+.back {
+
+    background: #6C4E31;
+    transform: rotateY(180deg);
+    border-radius: 3px;
+    color:var(--usercard-bg);
+}
+
+
+
+
+
+
+
+
+.achieve-card.active {
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.achieve-img {
+    width: 100%;
+    height: 40%;
+    margin-top: 4%;
+}
+
+
+.achieve-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transform: rotate(-3deg);
+    pointer-events: none;
+    user-select:none;
+
+}
+
+/* 업적 그래프 부분 */
+.achieve-infobox {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /*border: 3px solid red;*/
+}
+
+.achieve-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    /*border: 3px solid red;*/
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-bottom: 7%;
+}
+
+.inner-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--usercard-bg);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grade {
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin-bottom: 0;
+    color: #816139;
+    user-select:none;
+}
+
+.achieve-text {
+    width: 100%;
+    text-align: center;
+    /*border: 3px solid red;*/
+    color:  #4a3f35;
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 7%;
+    user-select:none;
+}
+
+
+#close-card-btn {
+    /*border:1px solid #623909;*/
+    width: fit-content;
+    height: fit-content;
+    margin-left: 90%;
+    margin-top: 2%;
+    cursor: pointer;
+}
+
+#close-card-btn i {
+    font-size: 4rem;
+    color: #6C4E31CC;
+}
+
+
+/* 버튼과 연동시킬 닫기버튼*/
+
+#user-card.hide {
+    display: none;
+}
+
+#user-card.show {
+    display: flex;
+}
+
+#card-overlay.hide {
+    display: none;
+}
+
+#card-overlay.show {
+    display: block;
+    opacity: 0.2;
+}
+
+.back .backside-text {
+    text-align: center;
+    margin-bottom: 10px;
+    /*border: 3px solid red;*/
+    user-select:none;
+    font-size: 2rem;
+}
+
+.back .backside-text.txt2 {
+    text-align: center;
+    line-height: 2rem;
+    font-size: 1.6rem;
+    padding: 0 3%;
+    /*border: 1px solid blue;*/
+    user-select:none;
+}
+
+.back .backside-text.txt3 {
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    /*border: 1px solid red;*/
+    user-select:none;
+}
+.back .backside-text.txt3 span{
+    font-size: 1.8rem;
+    user-select:none;
+}
+
+
+
+
+/* 원형 그래프 조절 부분 */
+.achieve-circle.circle1 {
+
+    background: conic-gradient(
+            hsl(34, 100%, 50%) 0deg,
+            transparent 0deg);
+}
+
+.achieve-circle.circle2 {
+
+    background: conic-gradient(hsl(34, 100%, 50%) 0deg, transparent 0deg);
+
+}
+
+.achieve-circle.circle3 {
+
+    background: conic-gradient(
+            hsl(34, 100%, 50%) 0deg,
+            transparent 0deg);
+
+}
+
+/* 텍스트 내용 조절 클래스*/
+/*.achieve-text.achieve1*/
+/*.achieve-text.achieve2*/
+/*.achieve-text.achieve3*/
+
+#modal-btn {
+    width: 20%;
+    height: 20%;
+    background: transparent;
+    margin-top: 50%;
+    cursor: pointer;
+}
+
+#modal-btn img {
+    width: 100%;
+    height: 100%;
+    rotate: -3deg;
+    transition: 0.4s;
+}
+
+#modal-btn:hover img {
+    transform: scale(115%) rotate(-5deg);
+
+}
+
+
+/* 툴팁 */
+#modal-btn[data-tooltip] {
+    position: relative;
+}
+
+#modal-btn[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: 110%;
+    top: 50%;
+    transform: translate(0%, -50%);
+    background-color: var(--primary-accent);
+    color: #fff;
+    padding: 8% 35%;
+    border-radius: 6px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+}
+
+#modal-btn:hover::after {
+    opacity: 1;
+}
+
