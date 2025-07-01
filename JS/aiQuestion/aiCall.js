@@ -48,7 +48,7 @@ async function aiQuestion(inputQuestion) {
 // async가 함수 앞에 있어야 await을 쓸 수 있음
 // await은 리턴 값이 오기 전까지 기다림
 async function aiCall() {
-  inputQuestion = textInput.value;// 사용자가 입력한 질문 내용 = textInput.value;
+  inputQuestion = textInput.value.trim();// 사용자가 입력한 질문 내용 = textInput.value;
   talkRendering('user', inputQuestion);// 사용자가 입력한 질문 렌더링
 
   const res = await aiQuestion(inputQuestion);// 질분답변을 JSON 객체로 파싱해서 받음
@@ -58,8 +58,8 @@ async function aiCall() {
   console.log('problem', problemExplain);
   talkRendering('aiEx', problemExplain);// 답변 렌더링하기
   talkRendering('aiSol',problemSolving)
+  // addAiTalk();
 }
-
 
 //===========프롬프트========//
 /**
@@ -116,6 +116,10 @@ export function aiGet() {
       aiCall(); //ai 호출 함수
     }
   })
-}
 
-// 질문 카운트 만들기
+  // "답변 보기 버튼" 토글로 "답변 영역" 열고 닫기
+  document.querySelector('.sol-btn').addEventListener("toggle", e=>{
+    console.log('sol-btn');
+    document.querySelector('.sol-btn').classList.toggle('show');
+  })
+}

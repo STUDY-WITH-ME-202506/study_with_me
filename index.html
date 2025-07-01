@@ -90,23 +90,18 @@
 
 
     <div class="container">
-        <div class="ai-section">
-            <div class="prev-question">직전에 입력한 질문</div>
-            <div class="answer-area">
-                <div class="answer-box">
-                    문제 영역이 이곳에 표시됩니다. (왼쪽 배치)
-                </div>
-                <button class="sol-btn">답변 보기</button>
-                <div class="solving-box">답변 영역</div>
+        <div class="ai-section" id="aiSection">
+            <div class="qa-block"></div>
+        </div>
 
-            </div>
-            <div class="input-area">
-                <input id="problemText" type="text" placeholder="질문을 입력하세요">
-                <button id="pushAi">확인</button>
-            </div>
+        <div class="input-area">
+            <input id="problemText" type="text" placeholder="질문을 입력하세요">
+            <button id="pushAi">확인</button>
         </div>
         <script type="module" src="./JS/app.js"></script>
     </div>
+
+
     <!--  playtime 모달영역  -->
     <div id="card-overlay" class="hide"></div>
     <div id="user-card" class="hide">
@@ -197,4 +192,6 @@
     </div>
 
 </body>
+
 </html>
+
