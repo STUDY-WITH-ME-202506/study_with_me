@@ -1,3 +1,4 @@
+
 import {loadQuote} from './quoteAPI.js'; // 명언 API 연결
 
 // 모달 열고 닫는 함수
@@ -35,3 +36,4 @@ export function quoteModal () {
         }
     });
 }
+

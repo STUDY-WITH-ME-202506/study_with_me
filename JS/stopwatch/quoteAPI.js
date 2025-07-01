@@ -1,3 +1,4 @@
+
 // 명언 랜덤 API
 export async function loadQuote() {
     // #quoteModal 안의 요소들만 선택하도록 수정

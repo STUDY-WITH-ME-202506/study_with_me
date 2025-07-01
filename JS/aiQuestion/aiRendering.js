@@ -1,3 +1,4 @@
+
 //===== 전역 변수 ====//
 const aiSection = document.querySelector('.ai-section');
 const qaBlock = document.querySelector('.qa-block');

@@ -1,3 +1,4 @@
+
 /* --- 투두리스트 컨테이너 --- */
 
 .todo-list {
@@ -383,5 +384,3 @@
 .modal-overlay-internal #confirmNo:hover {
     background-color: var(--bg-subtle);
 }
-
-

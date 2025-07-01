@@ -1,5 +1,6 @@
 
 
+
 export function playTime() {
 
 // ================= 변수 선언부 ================//
@@ -190,3 +191,4 @@ export function playTime() {
     openModal();
     closeModal();
 }
+
