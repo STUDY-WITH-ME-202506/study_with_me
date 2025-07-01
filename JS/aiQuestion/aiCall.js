@@ -4,7 +4,7 @@ import {stringSplit} from './cleanString.js';
 
 //======== 변수 정의 ========//
 // 제미나이 key와 주소
-const API_KEY = 'AIzaSyAnx5WFFsMBgfx8dmdEruWmT5888F5TJCI';
+const API_KEY = '';
 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 // 프롬프트관련 변수
 const textInput = document.getElementById('problemText');//질문 입력창 주소
@@ -45,7 +45,7 @@ async function aiQuestion(inputQuestion) {
 // async가 함수 앞에 있어야 await을 쓸 수 있음
 // await은 리턴 값이 오기 전까지 기다림
 async function aiCall() {
-  inputQuestion = textInput.value;// 사용자가 입력한 질문 내용 = textInput.value;
+  inputQuestion = textInput.value.trim();// 사용자가 입력한 질문 내용 = textInput.value;
   talkRendering('user', inputQuestion);// 사용자가 입력한 질문 렌더링
 
   const res = await aiQuestion(inputQuestion);// 질분답변을 JSON 객체로 파싱해서 받음
@@ -55,8 +55,8 @@ async function aiCall() {
   console.log('problem', problemExplain);
   talkRendering('aiEx', problemExplain);// 답변 렌더링하기
   talkRendering('aiSol',problemSolving)
+  // addAiTalk();
 }
-
 
 //===========프롬프트========//
 /**
@@ -117,8 +117,6 @@ export function aiGet() {
   // "답변 보기 버튼" 토글로 "답변 영역" 열고 닫기
   document.querySelector('.sol-btn').addEventListener("toggle", e=>{
     console.log('sol-btn');
-    document.querySelector('.solving-box').classList.toggle('show');
+    document.querySelector('.sol-btn').classList.toggle('show');
   })
 }
-
-// 질문 카운트 만들기

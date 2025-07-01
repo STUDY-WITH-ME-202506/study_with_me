@@ -1,27 +1,56 @@
-
+body{
+    overflow-y: hidden;
+}
 
 .container {
     flex: 1;
     display: flex;
+    /*flex-direction: column; !* 세로 정렬 *!*/
     position: relative;
-    overflow: hidden;
-    padding: 20px; /* 컨테이너에 패딩 추가 */
+    /*width: 80%; !* 전체 너비의 80% 사용 *!*/
+    /*max-width: 900px; !* 최대 너비 설정 *!*/
+    min-height: calc(100vh - 40px); /* 뷰포트 높이에서 상하 패딩 제외 */
+    padding-bottom: 120px; /* input-area가 차지할 공간 확보 */
+    box-sizing: border-box;
 }
 
 .ai-section {
     flex: 1;
     display: flex;
     flex-direction: column;
-    position: relative;
-    transition: margin-right 0.4s ease-in-out; /* 전환 효과 부드럽게 */
-    box-sizing: border-box;
     gap: 20px; /* 요소 간 간격 추가 */
+    overflow-y: auto; /* Y축 스크롤 가능하게 */
+    overflow-x: hidden;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background-color: var(--bg-main);
+    scroll-behavior: smooth; /* 부드러운 스크롤 */
+    padding-bottom: 20px; /* 스크롤 하단 여백 */
+    min-height: 200px; /* 최소 높이 설정 */
 }
 
+.qa-block {
+    position: relative; /* 자식 요소인 .prev-question의 absolute 포지셔닝을 위한 기준점 설정 */
+    display: flex; /* flexbox를 유지하여 내부 요소 정렬 */
+    flex-direction: column; /* 세로 정렬 유지 */
+    gap: 10px; /* 기존 간격 유지 */
+    width: 100%; /* 기존 너비 유지 */
+    top: 40px;
+}
+
+/* 답변 영역 (answer-area) */
+.answer-area {
+    position: relative; /* answer-box 내부 요소 정렬을 위해 필요할 수 있습니다. */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* 질문 표시 */
 .prev-question {
-    position: absolute;
-    top: 0px;
-    right: 0px;
     background-color: var(--bg-subtle);
     padding: 10px 16px;
     border-radius: 10px;
@@ -29,67 +58,181 @@
     color: var(--text-main);
     border: 1px solid var(--border-color);
     box-shadow: 0 2px 5px var(--shadow-color);
-    max-width: 300px;
-    z-index: 1;
+    width: fit-content; /* 내용물 크기에 맞게 너비 조절 */
+    min-width: 50px; /* 최소 너비 설정 (텍스트 길이에 따라 조정) */
+    height: 38px;
+    position: absolute; /* 절대 위치 지정 */
+    top: -30px; /* 부모 요소(qa-block)의 상단에 위치 */
+    left: 0; /* 부모 요소(qa-block)의 왼쪽에 위치 */
 }
 
+.user-question {
+    background-color: var(--bg-subtle);
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px var(--shadow-color);
+    width: fit-content; /* 또는 max-content */
+    max-width: 70%; /
+    align-self: flex-end; /* 질문은 오른쪽 정렬 */
+    margin-bottom: 10px; /* 답변 박스와의 간격 */
+    margin-left: 0;
+}
+
+/* 답변 박스 */
 .answer-box {
     background-color: var(--bg-widget);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 20px 20px 0 20px;
-    overflow-y: auto;
-    flex-grow: 1; /* 높이를 유연하게 조절 */
-    box-shadow: inset 0 1px 4px var(--shadow-color); /* 안쪽 그림자 효과 */
+    flex-grow: 1;
+    box-shadow: inset 0 1px 4px var(--shadow-color);
     color: var(--text-subtle);
     font-size: 1.1rem;
     line-height: 1.6;
     white-space: pre-wrap;
+    width: 100%; /* 너비를 100%로 설정 */
+    min-height: 80px; /* 최소 높이 설정 */
+    padding-bottom: 10px;
+    z-index: 2; /* 답변 박스가 답변 보기 버튼 위에 오도록 */
 }
-
-.answer-box p { /* 실제 답변이 들어갈 경우를 대비 */
+.ab-copy {
+    background-color: var(--bg-widget);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px 20px 0 20px;
+    flex-grow: 1;
+    box-shadow: inset 0 1px 4px var(--shadow-color);
+    color: var(--text-subtle);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    width: 100%;
+    min-height: 80px;
+    padding-bottom: 10px;
+    z-index: 2;
+}
+.answer-box p, .ab-copy p {
     color: var(--text-main);
 }
-.solving-box {
+
+/* 답변 보기 버튼 */
+details {
+    margin-top: -15px; /* 답변 박스와 약간 겹치도록 */
+    align-self: flex-end; /* 오른쪽으로 정렬 */
+    z-index: 3; /* 답변 박스보다 위에 오도록 */
+    position: relative;
+}
+.sol-btn {
+    width: 100px;
+    height: 20px;
+    font-size: 15px;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 700;
+    background: #ff8d07;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 5;
+    position: relative;
+    top: -5px;
+}
+
+/* summary 태그 스타일 초기화 및 커스텀 */
+summary {
+    list-style: none; /* 기본 마커 제거 */
+    -webkit-tap-highlight-color: transparent; /* 모바일 탭 하이라이트 제거 */
+    outline: none; /* 포커스 아웃라인 제거 */
+    display: inline-block; /* 텍스트 크기에 맞춰 너비 조정 */
+    padding: 0 10px; /* 내부 패딩 */
+    line-height: 20px; /* 텍스트 세로 중앙 정렬 */
+    color: white; /* 텍스트 색상 */
+    transition: background-color 0.3s ease;
+}
+
+summary::-webkit-details-marker {
+    display: none; /* 크롬 등에서 기본 마커 제거 */
+}
+summary::marker {
+    display: none; /* 파이어폭스 등에서 기본 마커 제거 */
+}
+
+/* 답변 영역 (숨김 기본) */
+.sol-box {
+    display: none;
+    position: relative; /* answer-area 내부에서 상대적 위치 */
+    top: 0; /* answer-box 아래가 아닌 바로 아래에 위치 */
+    width: 100%;
     background-color: var(--bg-widget);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 20px;
-    overflow-y: auto;
-    flex-grow: 1; /* 높이를 유연하게 조절 */
-    box-shadow: inset 0 1px 4px var(--shadow-color); /* 안쪽 그림자 효과 */
+    box-shadow: inset 0 1px 4px var(--shadow-color);
     color: var(--text-subtle);
     font-size: 1.1rem;
     line-height: 1.6;
     white-space: pre-wrap;
-    z-index: -1;
+    z-index: 1;
+    animation: fadeIn 0.3s ease-in;
+    margin-top: -10px; /* 답변 보기 버튼과 겹치지 않게 조정 */
+}
+.sb-copy {
+    display: none;
     position: relative;
-    top: -30px;
-}
-.solving-box.show{
-    padding-top: 80px;
-    position: relative;
-    top: -60px;
-}
-.sol-btn{
-    position: relative;
-    z-index: 2;
-    top: -40px;
-    left: 1200px;
-    background: #ff8d07;
-    border-radius: 5px;
-}
-.sol-btn.show{
-    z-inex: 3;
-}
-.input-area {
-    margin-top: auto;
-    display: flex;
+    top: 0;
     width: 100%;
-    box-sizing: border-box;
-    box-shadow: 0 2px 8px var(--shadow-color);
-    border-radius: 12px; /* 전체 영역을 둥글게 */
-    overflow: hidden; /* 자식 요소가 삐져나오지 않도록 */
+    background-color: var(--bg-widget);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: inset 0 1px 4px var(--shadow-color);
+    color: var(--text-subtle);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    z-index: 1;
+    animation: fadeIn 0.3s ease-in;
+    margin-top: -10px;
+}
+
+/* details 열렸을 때 보여줌 */
+details[open] + .sol-box { /* + 형제 선택자를 사용하여 details 바로 다음의 .sol-box를 선택 */
+    display: block;
+}
+details[open] + .sb-copy {
+    display: block;
+}
+
+/* 부드럽게 등장 애니메이션 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.input-area {
+    position: fixed;
+    bottom: 20px; /* 하단에서 20px 위 */
+    left: 50%;
+    transform: translateX(-50%); /* 가운데 정렬 */
+    width: 80%; /* 너비는 컨테이너와 동일하게 */
+    max-width: 900px; /* 최대 너비도 컨테이너와 동일하게 */
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 10;
 }
 
 .input-area input {
@@ -101,6 +244,7 @@
     color: var(--text-main);
     font-size: 1rem;
     transition: border-color 0.3s ease;
+    border-radius: 8px 0 0 8px; /* 왼쪽만 둥글게 */
 }
 
 .input-area input:focus {
@@ -117,6 +261,7 @@
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    border-radius: 0 8px 8px 0; /* 오른쪽만 둥글게 */
 }
 
 .input-area button:hover {
