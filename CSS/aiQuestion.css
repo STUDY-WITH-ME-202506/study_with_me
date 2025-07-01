@@ -233,23 +233,23 @@ details[open] + .sb-copy {
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     z-index: 10;
+
 }
+
 
 .input-area input {
     flex: 1;
     padding: 14px 16px;
-    border: 1px solid var(--border-color);
-    border-right: none;
     background-color: var(--bg-widget);
     color: var(--text-main);
     font-size: 1rem;
     transition: border-color 0.3s ease;
     border-radius: 8px 0 0 8px; /* 왼쪽만 둥글게 */
+
 }
 
 .input-area input:focus {
     outline: none;
-    border-color: var(--primary-accent);
 }
 
 .input-area button {

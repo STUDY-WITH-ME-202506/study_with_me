@@ -292,6 +292,17 @@
 .quote-btn:hover .quote-img {
     filter: brightness(0) invert(1);
 }
+.quote-name,
+.quote-profile,
+.quote-text {
+    font-size: 1rem;
+    color: var(--text-main);  /* 혹은 #333 */
+    line-height: 1.6;
+    white-space: normal;
+    word-break: break-word;
+    padding: 4px 0;
+    min-height: 1.2em; /* 최소 높이 확보 */
+}
 
 .stopwatch-display {
     font-size: 1.2rem;

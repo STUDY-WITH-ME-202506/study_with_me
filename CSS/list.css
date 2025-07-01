@@ -262,6 +262,20 @@
     border-radius: 6px;
 }
 
+#filter-all:disabled,
+#filter-active:disabled,
+#filter-completed:disabled,
+#clear-completed:disabled {
+    background-color: #f1f1f1; /* 비활성화 배경색 */
+    color: #ccc;            /* 비활성화 글자색 */
+    cursor: not-allowed;     /* '사용 불가' 커서 모양으로 변경 */
+    border-color: #e0e0e0;
+}
+
+#clear-completed:not(:disabled):hover {
+    background-color: #ef5350; /* 예시: 삭제 버튼 호버 시 붉은 계열 */
+    color: white;
+}
 
 /* 현재 활성화된 필터 버튼 스타일 */
 #filter-all.active {
